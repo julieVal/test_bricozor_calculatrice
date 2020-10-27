@@ -21,23 +21,27 @@ if(isset($_POST['resultat'])){
 
 // Etapes et traitements
 switch ($action) {
+    //accueil de la calulatrice vide
     case 'calculatrice':
         require('vues/view_header.php');
         require('vues/view_calculatrice.php');
         require('vues/view_footer.php');
     break;
+    //affiche le résultat du calcul
     case 'calculer':
         $resultat = calculer($nbr1, $nbr2, $operator);
         require('vues/view_header.php');
         require('vues/view_calculatrice.php');
         require('vues/view_footer.php');
     break;
+    //Sauvegarder un résultat
     case 'save':
         save($resultat);
         require('vues/view_header.php');
         require('vues/view_calculatrice.php');
         require('vues/view_footer.php');
     break;
+    //Afficher l'historique des résultat
     case "history":
         $historique = read();
         require('vues/view_header.php');

@@ -17,7 +17,8 @@ else{
 <div class="bg-secondary w-100" style="height: 100vh;">
     <div class="container-fluid col-md-6 mx-auto pt-5">
         <h1>Ceci est une calculatrice</h1>
-
+        <p class="text-light"> Veuillez entrer 2 nombres, choisir l'opérateur de calcul et cliquer sur "Calculer"</p>
+        <!-- Formulaire de la calculatrice -->
         <form action="<?php echo $_SERVER['PHP_SELF'].'?action=calculer'?>" method="post" class="form-group">
         
             <input class="form-control mb-2" type="text" name="nbr1" id="nbr1" pattern="^[-]?\d+(\.\d+)?" placeholder="Entrez un nombre" required value="<?php echo $nbr1; ?>">
@@ -35,16 +36,19 @@ else{
     
         </form>
 
+        <!-- Affichage et enregistrement du résultat -->
         <form action="<?php echo $_SERVER['PHP_SELF'].'?action=save'?>" method="post" class="form-group <?php echo $classResultat; ?> ">
             
             <input type="text" class="bg-light form-control mb-2" value="Le résulat est <?php echo $resultat;?>" disabled >
 
             <input type="hidden" name="resultat" id="resultat" value="<?php echo $resultat;?>">
 
+            <!-- Enregistrer le résultat et retour à la calculatrice vide -->
             <input class="btn btn-info" type="submit" value="Enregistrer le résultat">
 
         </form>
 
+        <!-- formulaire d'accès à l'historique -->
         <form action="<?php echo $_SERVER['PHP_SELF'].'?action=history'?>" method="post" class="form-group ">
         
             <input class="btn btn-info" type="submit" value="Voir l'historique des résultats">
