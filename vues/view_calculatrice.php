@@ -16,7 +16,7 @@ else{
 ?>
 
 <div class="container-fluid">
-<h1>Ceci est une calculatrice</h1>
+    <h1>Ceci est une calculatrice</h1>
 
     <form action="<?php echo $_SERVER['PHP_SELF'].'?action=calculer'?>" method="post" class="form-group col-md-3 mx-auto">
     
@@ -32,12 +32,23 @@ else{
         <input class="form-control mb-2" type="text" name="nbr2" id="nbr2" pattern="^[-]?\d+(\.\d+)?" placeholder="Entrez un nombre" required value="<?php echo $nbr2; ?>">
 
         <input class="btn btn-danger" type="submit" value="Calculer">
-        
-        <div class="<?php echo $classResultat; ?>">
-            <p> Le résulat est <?php echo $resultat;?></p>
-        </div>
+  
     </form>
-     
+
+    <form action="<?php echo $_SERVER['PHP_SELF'].'?action=save'?>" method="post" class="form-group col-md-3 mx-auto <?php echo $classResultat; ?>">
+        <p> Le résulat est <?php echo $resultat;?></p>
+
+        <input type="hidden" name="resultat" id="resultat" value="<?php echo $resultat;?>">
+
+        <input class="btn btn-info" type="submit" value="Enregistrer le résultat">
+
+    </form>
+
+     <form action="<?php echo $_SERVER['PHP_SELF'].'?action=history'?>" method="post" class="form-group col-md-3 mx-auto">
+    
+        <input class="btn btn-info" type="submit" value="Voir l'historique des résultats">
+        
+    </form>
 
 </div>
            
