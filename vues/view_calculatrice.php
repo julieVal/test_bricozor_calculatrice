@@ -14,11 +14,11 @@ else{
     $classResultat ="d-none";
 }
 ?>
-
-<div class="container-fluid">
+<div class="bg-secondary w-100" style="height: 100vh;">
+<div class="container-fluid col-md-6 mx-auto pt-5">
     <h1>Ceci est une calculatrice</h1>
 
-    <form action="<?php echo $_SERVER['PHP_SELF'].'?action=calculer'?>" method="post" class="form-group col-md-3 mx-auto">
+    <form action="<?php echo $_SERVER['PHP_SELF'].'?action=calculer'?>" method="post" class="form-group">
     
         <input class="form-control mb-2" type="text" name="nbr1" id="nbr1" pattern="^[-]?\d+(\.\d+)?" placeholder="Entrez un nombre" required value="<?php echo $nbr1; ?>">
 
@@ -35,8 +35,9 @@ else{
   
     </form>
 
-    <form action="<?php echo $_SERVER['PHP_SELF'].'?action=save'?>" method="post" class="form-group col-md-3 mx-auto <?php echo $classResultat; ?>">
-        <p> Le résulat est <?php echo $resultat;?></p>
+    <form action="<?php echo $_SERVER['PHP_SELF'].'?action=save'?>" method="post" class="form-group <?php echo $classResultat; ?> ">
+        
+        <input type="text" class="bg-light form-control mb-2" value="Le résulat est <?php echo $resultat;?>" disabled >
 
         <input type="hidden" name="resultat" id="resultat" value="<?php echo $resultat;?>">
 
@@ -44,11 +45,11 @@ else{
 
     </form>
 
-     <form action="<?php echo $_SERVER['PHP_SELF'].'?action=history'?>" method="post" class="form-group col-md-3 mx-auto">
+     <form action="<?php echo $_SERVER['PHP_SELF'].'?action=history'?>" method="post" class="form-group ">
     
         <input class="btn btn-info" type="submit" value="Voir l'historique des résultats">
         
     </form>
 
 </div>
-           
+</div>         
