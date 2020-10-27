@@ -41,10 +41,14 @@ else{
         <input type="hidden" name="resultat" id="resultat" value="<?php echo $resultat;?>">
 
         <input class="btn btn-info" type="submit" value="Enregistrer le résultat">
-        
+
     </form>
 
-     
+     <form action="<?php echo $_SERVER['PHP_SELF'].'?action=history'?>" method="post" class="form-group col-md-3 mx-auto">
+    
+        <input class="btn btn-info" type="submit" value="Voir l'historique des résultats">
+        
+    </form>
 
 </div>
            
