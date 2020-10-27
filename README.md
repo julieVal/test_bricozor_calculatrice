@@ -26,3 +26,5 @@ Effectuer plusieurs opérations à la suite en prenant le résultat précedent c
 Afficher un message de confirmation lors de l'enregistrement d'un résultat.
 Afficher des messages d'erreur explicites lors de la saisie des nombres.
 Afficher le résultat et enregistrer un résultat sans rechargement de page (AJAX ou JS).
+Possibilité de vider l'historique.
+
