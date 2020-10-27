@@ -24,4 +24,10 @@ function calculer($nbr1, $nbr2, $operator)
     return $resultat;
 }
 
+function save($resultat){
+    $fichier = fopen ("txt/historique.txt", "a");
+    fwrite($fichier, $resultat."\n");
+    fclose($fichier);
+}
+
 ?>

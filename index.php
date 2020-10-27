@@ -14,13 +14,17 @@ if(isset($_POST['nbr1']) && isset($_POST['nbr2']) && isset($_POST['operator'])){
     $operator = $_POST['operator'];
 }
 
+if(isset($_POST['resultat'])){
+    $resultat = $_POST['resultat'];
+}
 
-/*
+
+
 echo "Post <br>";
 var_dump($_POST);
 echo "Get <br>";
 var_dump($_GET);
-*/
+
 // Etapes et traitements
 switch ($action) {
     case 'calculatrice':
@@ -30,6 +34,12 @@ switch ($action) {
     break;
     case 'calculer':
         $resultat = calculer($nbr1, $nbr2, $operator);
+        require('vues/view_header.php');
+        require('vues/view_calculatrice.php');
+        require('vues/view_footer.php');
+    break;
+    case 'save':
+        save($resultat);
         require('vues/view_header.php');
         require('vues/view_calculatrice.php');
         require('vues/view_footer.php');
