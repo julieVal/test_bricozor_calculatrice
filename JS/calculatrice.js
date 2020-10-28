@@ -194,10 +194,23 @@ function addOperator(tab, nb, operateur){
 }
 
 function addNumber(nb, value){
-
-    nb+=value ;
-    screen.innerHTML = nb; 
-    return nb;
+    let flag =false;
+    if(value != "."){
+       flag = true;
+    }
+    else if(nb.indexOf(".") == -1){
+        console.log("virgule");
+        flag = true;
+    }
+    if(flag){
+        nb+=value ;
+        screen.innerHTML = nb; 
+        return nb;
+    }
+    else{
+        return nb;
+    }
+ 
     
 }
 
