@@ -73,21 +73,28 @@ else{
 
         </div>
         <!-- Affichage et enregistrement du résultat -->
-        <form action="<?php echo $_SERVER['PHP_SELF'].'?action=save'?>" method="post" class="form-group <?php echo $classResultat; ?> ">
-            
-            <input type="text" class="bg-light form-control mb-2" value="Le résulat est <?php echo $resultat;?>" disabled >
-
-            <input type="hidden" name="resultat" id="resultat" value="<?php echo $resultat;?>">
-
-            <input type="hidden" name="nbr1" id="nbr1" value="<?php echo $nbr1;?>">
-            <input type="hidden" name="nbr2" id="nbr2" value="<?php echo $nbr2;?>">
-            <input type="hidden" name="operator" id="operator" value="<?php echo $operator;?>">
-
-            <!-- Enregistrer le résultat et retour à la calculatrice vide -->
+        <div id="save" class="d-none">
             <input class="btn btn-info" type="submit" value="Enregistrer le résultat">
+            <input type="hidden" name="resultat" id="resultat" value="">
+            <input type="hidden" name="nbr1" id="tabCalcul" value="">
+        </div>
 
-        </form>
 
+            <form action="<?php echo $_SERVER['PHP_SELF'].'?action=save'?>" method="post" class="form-group <?php echo $classResultat; ?> ">
+                
+                <input type="text" class="bg-light form-control mb-2" value="Le résulat est <?php echo $resultat;?>" disabled >
+
+                <input type="hidden" name="resultat" id="resultat" value="<?php echo $resultat;?>">
+
+                <input type="hidden" name="nbr1" id="nbr1" value="<?php echo $nbr1;?>">
+                <input type="hidden" name="nbr2" id="nbr2" value="<?php echo $nbr2;?>">
+                <input type="hidden" name="operator" id="operator" value="<?php echo $operator;?>">
+
+                <!-- Enregistrer le résultat et retour à la calculatrice vide -->
+                <input class="btn btn-info" type="submit" value="Enregistrer le résultat">
+
+            </form>
+        
         <!-- formulaire d'accès à l'historique -->
         <form action="<?php echo $_SERVER['PHP_SELF'].'?action=history'?>" method="post" class="form-group ">
         

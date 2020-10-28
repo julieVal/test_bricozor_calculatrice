@@ -23,6 +23,12 @@ var small_calc =  document.getElementById("en_cour");
 var tCalcul = [];
 var nombre = "";
 
+    //Historique
+var save = document.getElementById("save");
+var inputResultat = document.getElementById("resultat");
+var tabCalcul = document.getElementById("tabCalcul");
+
+
     //booléen
 var bResultat =false;
 
@@ -151,12 +157,17 @@ function calculer(tab){
                 break;
             }   
         }
+
+        let test=["1","+","3"];
+        save.className = "d-block";
+        tabCalcul.value = test;
         bResultat = true;
         return  tab[0];
     }         
 }
     
 function addOperator(tab, nb, operateur){
+    save.className = "d-none";
     console.log(bResultat);
     let length = tab.length;
     if(nb.length != 0 ){
@@ -165,6 +176,7 @@ function addOperator(tab, nb, operateur){
             tab.push(operateur);
             small_calc.innerHTML = tab.join('');
             nb="";
+            
             return nb;
         }
         else if(tab[length - 1] != "+" || tab[length - 1]!= "-" || tab[length - 1]!= "*"  || tab[length - 1]!= "/" ){
@@ -191,6 +203,7 @@ function addOperator(tab, nb, operateur){
     else{
         nb="";
     }
+    
 }
 
 function addNumber(nb, value){
