@@ -87,26 +87,26 @@ calc0.addEventListener("click", function(){
     }
 });
 calcAdd.addEventListener("click", function(){
-    if(nombre){
+    if(screen.textContent.trim().length != 0){
         nombre = addOperator(tCalcul, nombre, calcAdd.value);
         screen.innerHTML = nombre;
     }
 
 });
 calcSous.addEventListener("click", function(){
-    if(nombre){
+    if(screen.textContent.trim().length != 0){
         nombre = addOperator(tCalcul, nombre, calcSous.value);
         screen.innerHTML = nombre;
     }
 });
 calcDiv.addEventListener("click", function(){
-    if(nombre){
+    if(screen.textContent.trim().length != 0){
         nombre = addOperator(tCalcul, nombre, calcDiv.value);
         screen.innerHTML = nombre;
     }
 });
 calcMulti.addEventListener("click", function(){
-    if(nombre){
+    if(screen.textContent.trim().length != 0){
         nombre = addOperator(tCalcul, nombre, calcMulti.value);
         screen.innerHTML = nombre;
     }
