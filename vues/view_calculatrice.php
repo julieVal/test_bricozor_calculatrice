@@ -42,8 +42,8 @@ else{
 
         <!-- Nouveau visuel calculatrice -->
         <div class="calculatrice col-lg-8 mx-auto">
-            <div id="en_cour" class="text-light"></div>
-            <div class="calcul bg-light" id="calcul" style="height: 30px";> </div>
+            <div id="en_cour" class="text-light"><?php echo $tabCalcul ?></div>
+            <div class="calcul bg-light" id="calcul" style="height: 30px";> <?php echo $resultat ?></div>
             <div class="row">
                 <input type="button" class="btn btn-primary col-3" id="7" value="7">
                 <input type="button" class="btn btn-primary col-3" id="8" value="8">

@@ -27,7 +27,9 @@ var nombre = "";
 var save = document.getElementById("save");
 var inputResultat = document.getElementById("resultat");
 var tabCalcul = document.getElementById("tabCalcul");
-
+if(screen.innerHTML != null){
+    nombre = screen.innerHTML;
+}
 
     //booléen
 var bResultat =false;
@@ -162,9 +164,10 @@ function calculer(tab){
             }   
         }
  
-        save.className = "d-block";
+        save.className = "d-block"; 
         tabCalcul.value = tComplet;
         inputResultat.value = tab[0];
+    
         bResultat = true;
         return  tab[0];
     }         
@@ -223,5 +226,3 @@ function addNumber(nb, value){
         return nb;
     }
 }
-
-
