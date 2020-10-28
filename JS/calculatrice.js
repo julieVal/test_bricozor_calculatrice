@@ -16,6 +16,7 @@ var calcDiv = document.getElementById("/");
 var calcMulti = document.getElementById("*");
 var calcResultat = document.getElementById("=");
 var calcDec = document.getElementById(".");
+var btnSuppr = document.getElementById("delete");
 
     //Zone d'affichage
 var screen = document.getElementById("calcul");
@@ -124,6 +125,15 @@ calcResultat.addEventListener("click", function(){
         nombre = calculer(tCalcul);
         screen.innerHTML = nombre;      
     }
+});
+
+btnSuppr.addEventListener("click",function(){
+    screen.innerHTML = "";
+    nombre ="";
+    small_calc.innerHTML="";
+    tCalcul = [];
+    save.className = "d-none";
+
 });
 
 //Fonctions

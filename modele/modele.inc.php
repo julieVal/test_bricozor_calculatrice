@@ -79,7 +79,7 @@ function read(){
 function saveHistory(string $tab, float $resultat){
     $fichier = fopen ("txt/historique.txt", "a");
     $enregistrement = str_replace(","," ",$tab);
-    
+    $enregistrement = str_replace(". ",".0",$enregistrement);
     $enregistrement .=" = ".$resultat;
     fwrite($fichier, $enregistrement."\n");
     fclose($fichier);
