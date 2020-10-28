@@ -27,6 +27,7 @@ var nombre = "";
 
     //booléen
 var bResultat =false;
+var bError = false;
 //Abonnement des boutons
 calc1.addEventListener("click", function(){
     nombre = addNumber(nombre, calc1.value) ;
@@ -87,43 +88,50 @@ calcResultat.addEventListener("click", function(){
 
 //Fonctions
 function calculer(tab){
-    while (tab.length > 1) {
-        console.log(tab);
-        let nbr1 = parseFloat(tab[0]);
-        let nbr2 = parseFloat(tab[2]);
-        let operator = tab[1].trim();
-        let resultat = "";
-        switch (operator) {
-            case "+":
-                resultat = nbr1 + nbr2;
-                tab.splice(0,3,resultat);
-                console.log(tab);
-            break;
-            case "-":
-                resultat = nbr1 - nbr2;
-                tab.splice(0,3,resultat);
-            break;
-            case "*":
-                resultat = nbr1 * nbr2;
-                tab.splice(0,3,resultat);
-            break;
-            case "/":
-                if (nbr2 == 0) {
-                    resultat = 0;
+    if(tab.length % 3 === 0){
+        while (tab.length > 1) {
+            console.log(tab);
+            let nbr1 = parseFloat(tab[0]);
+            let nbr2 = parseFloat(tab[2]);
+            let operator = tab[1].trim();
+            let resultat = "";
+            switch (operator) {
+                case "+":
+                    resultat = nbr1 + nbr2;
                     tab.splice(0,3,resultat);
-                } else {
-                    resultat = nbr1 / nbr2;
+                    console.log(tab);
+                break;
+                case "-":
+                    resultat = nbr1 - nbr2;
                     tab.splice(0,3,resultat);
-                }
-            break;
+                break;
+                case "*":
+                    resultat = nbr1 * nbr2;
+                    tab.splice(0,3,resultat);
+                break;
+                case "/":
+                    if (nbr2 == 0) {
+                        resultat = 0;
+                        tab.splice(0,3,resultat);
+                    } else {
+                        resultat = nbr1 / nbr2;
+                        tab.splice(0,3,resultat);
+                    }
+                break;
+            }
+            screen.innerHTML = tab[0];
+            bResultat = true;
         }
+        
     }
-    
-    screen.innerHTML = tab[0];
-    bResultat = true;
-    
+    else{
+        screen.innerHTML = "Il y a une erreur dans votre calcul." ;
+        bError = true;   
+    }   
+        
+        
 }
-
+    
 function addOperator(tab, nb, operateur){
     if(!bResultat){
         tab.push(nb);
@@ -137,11 +145,20 @@ function addOperator(tab, nb, operateur){
 
     nb="";
     return nb;
-    
 }
 
+    
+
+
 function addNumber(nb, value){
-    nb+=value ;
-    screen.innerHTML = nb; 
-    return nb; 
+    if(!bError){
+        nb+=value ;
+        screen.innerHTML = nb; 
+        return nb;
+    }
+    else{
+    
+        bError=false;
+    }
+     
 }
