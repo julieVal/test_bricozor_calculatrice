@@ -28,34 +28,55 @@ var bResultat =false;
 
 //Abonnement des boutons
 calc1.addEventListener("click", function(){
-    nombre = addNumber(nombre, calc1.value) ;
+    if(!bResultat){
+        nombre = addNumber(nombre, calc1.value) ;
+    }
+    
 });
 calc2.addEventListener("click", function(){
-    nombre = addNumber(nombre, calc2.value) ;
+    if(!bResultat){
+        nombre = addNumber(nombre, calc2.value) ;
+    }
 });
 calc3.addEventListener("click", function(){
-    nombre = addNumber(nombre, calc3.value) ;
+    if(!bResultat){
+        nombre = addNumber(nombre, calc3.value) ;
+    }
 });
 calc4.addEventListener("click", function(){
-    nombre = addNumber(nombre, calc4.value) ;
+    if(!bResultat){
+        nombre = addNumber(nombre, calc4.value) ;
+    }
 });
 calc5.addEventListener("click", function(){
-    nombre = addNumber(nombre, calc5.value) ;
+    if(!bResultat){
+        nombre = addNumber(nombre, calc5.value) ;
+    }
 });
 calc6.addEventListener("click", function(){
-    nombre = addNumber(nombre, calc6.value) ;
+    if(!bResultat){
+        nombre = addNumber(nombre, calc6.value) ;
+    }
 });
 calc7.addEventListener("click", function(){
-    nombre = addNumber(nombre, calc7.value) ;
+    if(!bResultat){
+        nombre = addNumber(nombre, calc7.value) ;
+    }
 });
 calc8.addEventListener("click", function(){
-    nombre = addNumber(nombre, calc8.value) ;
+    if(!bResultat){
+        nombre = addNumber(nombre, calc8.value) ;
+    }
 });
 calc9.addEventListener("click", function(){
-    nombre = addNumber(nombre, calc9.value) ;
+    if(!bResultat){
+        nombre = addNumber(nombre, calc9.value) ;
+    }
 });
 calc0.addEventListener("click", function(){
-    nombre = addNumber(nombre, calc0.value) ;
+    if(!bResultat){
+        nombre = addNumber(nombre, calc0.value) ;
+    }
 });
 calcAdd.addEventListener("click", function(){
     if(nombre){
@@ -83,7 +104,7 @@ calcMulti.addEventListener("click", function(){
     }
 });
 calcDec.addEventListener("click", function(){
-    if(nombre){
+    if(nombre && !bResultat){
         nombre = addNumber(nombre, calcDec.value);
         screen.innerHTML = nombre;
     }
@@ -99,6 +120,7 @@ calcResultat.addEventListener("click", function(){
 
 //Fonctions
 function calculer(tab){  
+    console.log(tab);
     if(tab.length >= 3) {
         while (tab.length > 1) {
             let nbr1 = parseFloat(tab[0]);
@@ -135,6 +157,7 @@ function calculer(tab){
 }
     
 function addOperator(tab, nb, operateur){
+    console.log(bResultat);
     let length = tab.length;
     if(nb.length != 0 ){
         if(length == 0){
@@ -145,21 +168,24 @@ function addOperator(tab, nb, operateur){
             return nb;
         }
         else if(tab[length - 1] != "+" || tab[length - 1]!= "-" || tab[length - 1]!= "*"  || tab[length - 1]!= "/" ){
-            if(!bResultat){  
-                tab.push(nb);
-            }
-            else{
-                bResultat = false;
-                if(operateur != "=" ){
+            if(!bResultat){ 
+                if(operateur != "="){
+                    console.log("entrer");
+                    tab.push(nb);
                     tab.push(operateur);
+                } 
+                else{
+                    tab.push(nb);
                 }
             }
+            else{
+                bResultat=false;
+                tab.push(operateur);
+            }
+            console.log(tab);
             small_calc.innerHTML = tab.join('');
             nb="";
             return nb;
-        }
-        else{
-            return false;
         }
     }
     else{
@@ -168,11 +194,11 @@ function addOperator(tab, nb, operateur){
 }
 
 function addNumber(nb, value){
-  if(!bResultat){
-        nb+=value ;
-        screen.innerHTML = nb; 
-        return nb;
-    }
+
+    nb+=value ;
+    screen.innerHTML = nb; 
+    return nb;
+    
 }
 
 function checkNombre(nb){

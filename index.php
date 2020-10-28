@@ -18,7 +18,7 @@ if(isset($_POST['nbr1']) && isset($_POST['nbr2']) && isset($_POST['operator'])){
 if(isset($_POST['resultat'])){
     $resultat = $_POST['resultat'];
 }
-var_dump($_POST);
+//var_dump($_POST);
 // Etapes et traitements
 switch ($action) {
     //accueil de la calulatrice vide
