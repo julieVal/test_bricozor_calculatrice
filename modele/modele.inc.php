@@ -11,16 +11,16 @@
 function calculer(float $nbr1,float $nbr2,string $operator)
 {
     switch($operator){
-        case "addition":
+        case "+":
             $resultat = $nbr1 + $nbr2;
         break;
-        case "soustraction":
+        case "-":
             $resultat = $nbr1 - $nbr2;
         break;
-        case "multiplication":
+        case "*":
             $resultat = $nbr1 * $nbr2;
         break;
-        case "division":
+        case "/":
             if($nbr2 == 0){
                 $resultat = 0;
             }
@@ -38,9 +38,10 @@ function calculer(float $nbr1,float $nbr2,string $operator)
  * @param float $resultat
  * @return void
  */
-function save(float $resultat){
+function save(float $nbr1, float $nbr2, string $operator, float $resultat){
     $fichier = fopen ("txt/historique.txt", "a");
-    fwrite($fichier, $resultat."\n");
+    $enregistrement = $nbr1." ".$operator." ".$nbr2." = ".$resultat;
+    fwrite($fichier, $enregistrement."\n");
     fclose($fichier);
 }
 
