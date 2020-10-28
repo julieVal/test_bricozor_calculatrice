@@ -1,5 +1,3 @@
-console.log ("ok");
-
 //Pointer les éléments du DOM
     //Boutons de la calculatrice
 var calc1 = document.getElementById("1");
@@ -27,11 +25,10 @@ var nombre = "";
 
     //booléen
 var bResultat =false;
-var bError = false;
+
 //Abonnement des boutons
 calc1.addEventListener("click", function(){
     nombre = addNumber(nombre, calc1.value) ;
-
 });
 calc2.addEventListener("click", function(){
     nombre = addNumber(nombre, calc2.value) ;
@@ -61,36 +58,49 @@ calc0.addEventListener("click", function(){
     nombre = addNumber(nombre, calc0.value) ;
 });
 calcAdd.addEventListener("click", function(){
-    nombre = addOperator(tCalcul, nombre, calcAdd.value);
-    screen.innerHTML = nombre;
+    if(nombre){
+        nombre = addOperator(tCalcul, nombre, calcAdd.value);
+        screen.innerHTML = nombre;
+    }
+
 });
 calcSous.addEventListener("click", function(){
-    nombre =addOperator(tCalcul, nombre, calcSous.value);
-    screen.innerHTML = nombre;
+    if(nombre){
+        nombre = addOperator(tCalcul, nombre, calcSous.value);
+        screen.innerHTML = nombre;
+    }
 });
 calcDiv.addEventListener("click", function(){
-    nombre = addOperator(tCalcul, nombre, calcDiv.value);
-    screen.innerHTML = nombre;
+    if(nombre){
+        nombre = addOperator(tCalcul, nombre, calcDiv.value);
+        screen.innerHTML = nombre;
+    }
 });
 calcMulti.addEventListener("click", function(){
-    nombre = addOperator(tCalcul, nombre, calcMulti.value);
-    screen.innerHTML = nombre;
+    if(nombre){
+        nombre = addOperator(tCalcul, nombre, calcMulti.value);
+        screen.innerHTML = nombre;
+    }
 });
 calcDec.addEventListener("click", function(){
-    nombre = addNumber(nombre, calcDec.value) ;
+    if(nombre){
+        nombre = addNumber(nombre, calcDec.value);
+        screen.innerHTML = nombre;
+    }
+    
 });
 calcResultat.addEventListener("click", function(){
-    addOperator(tCalcul, nombre, calcResultat.value);
-    nombre="";
-    nombre = calculer(tCalcul);
-    
+    if(!bResultat && nombre && tCalcul.length>=2){
+        nombre = addOperator(tCalcul, nombre, calcResultat.value);
+        nombre = calculer(tCalcul);
+        screen.innerHTML = nombre;      
+    }
 });
 
 //Fonctions
-function calculer(tab){
-    if(tab.length % 3 === 0){
+function calculer(tab){  
+    if(tab.length >= 3) {
         while (tab.length > 1) {
-            console.log(tab);
             let nbr1 = parseFloat(tab[0]);
             let nbr2 = parseFloat(tab[2]);
             let operator = tab[1].trim();
@@ -99,7 +109,6 @@ function calculer(tab){
                 case "+":
                     resultat = nbr1 + nbr2;
                     tab.splice(0,3,resultat);
-                    console.log(tab);
                 break;
                 case "-":
                     resultat = nbr1 - nbr2;
@@ -118,47 +127,59 @@ function calculer(tab){
                         tab.splice(0,3,resultat);
                     }
                 break;
-            }
-            screen.innerHTML = tab[0];
-            bResultat = true;
+            }   
         }
-        
-    }
-    else{
-        screen.innerHTML = "Il y a une erreur dans votre calcul." ;
-        bError = true;   
-    }   
-        
-        
+        bResultat = true;
+        return  tab[0];
+    }         
 }
     
 function addOperator(tab, nb, operateur){
-    if(!bResultat){
-        tab.push(nb);
+    let length = tab.length;
+    if(nb.length != 0 ){
+        if(length == 0){
+            tab.push(nb);
+            tab.push(operateur);
+            small_calc.innerHTML = tab.join('');
+            nb="";
+            return nb;
+        }
+        else if(tab[length - 1] != "+" || tab[length - 1]!= "-" || tab[length - 1]!= "*"  || tab[length - 1]!= "/" ){
+            if(!bResultat){  
+                tab.push(nb);
+            }
+            else{
+                bResultat = false;
+                if(operateur != "=" ){
+                    tab.push(operateur);
+                }
+            }
+            small_calc.innerHTML = tab.join('');
+            nb="";
+            return nb;
+        }
+        else{
+            return false;
+        }
     }
-    bResultat = false;
-    if(operateur != "=" ){
-        tab.push(operateur);
+    else{
+        nb="";
     }
-    
-    small_calc.innerHTML = tab.join('');
-
-    nb="";
-    return nb;
 }
 
-    
-
-
 function addNumber(nb, value){
-    if(!bError){
+  if(!bResultat){
         nb+=value ;
         screen.innerHTML = nb; 
         return nb;
     }
-    else{
-    
-        bError=false;
+}
+
+function checkNombre(nb){
+    if(nb){
+        return true;
     }
-     
+    else{
+        return false;
+    }
 }
