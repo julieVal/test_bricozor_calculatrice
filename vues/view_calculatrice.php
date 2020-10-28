@@ -17,8 +17,11 @@ else{
 <div class="bg-secondary w-100" style="height: 100vh;">
     <div class="container-fluid col-md-6 mx-auto pt-5">
         <h1>Ceci est une calculatrice</h1>
-        <p class="text-light"> Veuillez entrer 2 nombres, choisir l'opérateur de calcul et cliquer sur "Calculer"</p>
+        <!--
+        <p class="text-light"> Veuillez entrer 2 nombres, choisir l'opérateur de calcul et cliquer sur "Calculer"</p> 
+        -->
         <!-- Formulaire de la calculatrice -->
+        <!--
         <form action="<?php echo $_SERVER['PHP_SELF'].'?action=calculer'?>" method="post" class="form-group">
         
             <input class="form-control mb-2" type="text" name="nbr1" id="nbr1" pattern="^[-]?\d+(\.\d+)?" placeholder="Entrez un nombre" required value="<?php echo $nbr1; ?>">
@@ -35,7 +38,39 @@ else{
             <input class="btn btn-danger" type="submit" value="Calculer">
     
         </form>
+        -->
 
+        <!-- Nouveau visuel calculatrice -->
+        <div class="calculatrice col-lg-8 mx-auto">
+            <div class="calcul bg-light "> dfd</div>
+            <div class="row">
+                <input type="button" class="btn btn-primary col-3" value="7">
+                <input type="button" class="btn btn-primary col-3" value="8">
+                <input type="button" class="btn btn-primary col-3" value="9">
+                <input type="button" class="btn btn-primary col-3" value="/">
+            </div>
+            <div class="row">
+                <input type="button" class="btn btn-primary col-3" value="4">
+                <input type="button" class="btn btn-primary col-3" value="5">
+                <input type="button" class="btn btn-primary col-3" value="6">
+                <input type="button" class="btn btn-primary col-3" value="*">
+            </div>
+            <div class="row">
+                <input type="button" class="btn btn-primary col-3" value="3">
+                <input type="button" class="btn btn-primary col-3" value="2">
+                <input type="button" class="btn btn-primary col-3" value="1">
+                <input type="button" class="btn btn-primary col-3" value="-">
+            </div>
+            <div class="row">
+                <input type="button" class="btn btn-primary col-3" value=".">
+                <input type="button" class="btn btn-primary col-3" value="0">
+                <input type="button" class="btn btn-primary col-3" value="=">
+                <input type="button" class="btn btn-primary col-3" value="+">
+            </div>
+    
+
+
+        </div>
         <!-- Affichage et enregistrement du résultat -->
         <form action="<?php echo $_SERVER['PHP_SELF'].'?action=save'?>" method="post" class="form-group <?php echo $classResultat; ?> ">
             
