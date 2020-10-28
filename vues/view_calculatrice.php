@@ -74,9 +74,11 @@ else{
         </div>
         <!-- Affichage et enregistrement du résultat -->
         <div id="save" class="d-none">
-            <input class="btn btn-info" type="submit" value="Enregistrer le résultat">
-            <input type="hidden" name="resultat" id="resultat" value="">
-            <input type="hidden" name="nbr1" id="tabCalcul" value="">
+            <form action="<?php echo $_SERVER['PHP_SELF'].'?action=saveHistory'?>" method="post" class="form-group">
+                <input class="btn btn-info" type="submit" value="Enregistrer le résultat">
+                <input type="hidden" name="resultat" id="resultat" value="">
+                <input type="hidden" name="tabCalcul" id="tabCalcul" value="">
+            </form>
         </div>
 
 

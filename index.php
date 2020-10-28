@@ -13,7 +13,9 @@ if(isset($_POST['nbr1']) && isset($_POST['nbr2']) && isset($_POST['operator'])){
     $nbr2 = $_POST['nbr2'];
     $operator = $_POST['operator'];
 }
-
+if(isset($_POST['tabCalcul'])){
+    $tabCalcul = $_POST['tabCalcul'];
+}
     //resultat de l'opération
 if(isset($_POST['resultat'])){
     $resultat = $_POST['resultat'];
@@ -41,6 +43,13 @@ switch ($action) {
         require('vues/view_calculatrice.php');
         require('vues/view_footer.php');
     break;
+    case 'saveHistory':
+        saveHistory($tabCalcul, $resultat);
+        require('vues/view_header.php');
+        require('vues/view_calculatrice.php');
+        require('vues/view_footer.php');
+    break;
+
     //Afficher l'historique des résultat
     case "history":
         $historique = read();

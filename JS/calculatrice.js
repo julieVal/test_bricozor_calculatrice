@@ -126,7 +126,11 @@ calcResultat.addEventListener("click", function(){
 
 //Fonctions
 function calculer(tab){  
-    console.log(tab);
+    let tComplet = [];
+    for (let index = 0; index < tab.length; index++) {
+        tComplet[index] = tab[index];  
+    }
+
     if(tab.length >= 3) {
         while (tab.length > 1) {
             let nbr1 = parseFloat(tab[0]);
@@ -157,10 +161,10 @@ function calculer(tab){
                 break;
             }   
         }
-
-        let test=["1","+","3"];
+ 
         save.className = "d-block";
-        tabCalcul.value = test;
+        tabCalcul.value = tComplet;
+        inputResultat.value = tab[0];
         bResultat = true;
         return  tab[0];
     }         
@@ -168,7 +172,6 @@ function calculer(tab){
     
 function addOperator(tab, nb, operateur){
     save.className = "d-none";
-    console.log(bResultat);
     let length = tab.length;
     if(nb.length != 0 ){
         if(length == 0){
@@ -176,13 +179,11 @@ function addOperator(tab, nb, operateur){
             tab.push(operateur);
             small_calc.innerHTML = tab.join('');
             nb="";
-            
             return nb;
         }
         else if(tab[length - 1] != "+" || tab[length - 1]!= "-" || tab[length - 1]!= "*"  || tab[length - 1]!= "/" ){
             if(!bResultat){ 
                 if(operateur != "="){
-                    console.log("entrer");
                     tab.push(nb);
                     tab.push(operateur);
                 } 
@@ -194,7 +195,6 @@ function addOperator(tab, nb, operateur){
                 bResultat=false;
                 tab.push(operateur);
             }
-            console.log(tab);
             small_calc.innerHTML = tab.join('');
             nb="";
             return nb;
@@ -202,8 +202,7 @@ function addOperator(tab, nb, operateur){
     }
     else{
         nb="";
-    }
-    
+    } 
 }
 
 function addNumber(nb, value){
@@ -223,15 +222,6 @@ function addNumber(nb, value){
     else{
         return nb;
     }
- 
-    
 }
 
-function checkNombre(nb){
-    if(nb){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
+
