@@ -4,6 +4,7 @@ session_start();
 
 // Initialisation des variables
 $action = 'calculatrice';
+
 if(isset($_GET['action'])){
     $action = $_GET['action'];
 }
@@ -15,8 +16,13 @@ if(isset($_POST['nbr1']) && isset($_POST['nbr2']) && isset($_POST['operator'])){
 }
 
     //resultat de l'opération
-if(isset($_POST['resultat'])){
+if(isset($_POST['resultat']) && isset($_POST['tabCalcul'])){
     $resultat = $_POST['resultat'];
+    $tabCalcul = $_POST['tabCalcul'];
+}
+else{
+    $resultat ="";
+    $tabCalcul="";
 }
 //var_dump($_POST);
 // Etapes et traitements
@@ -41,6 +47,15 @@ switch ($action) {
         require('vues/view_calculatrice.php');
         require('vues/view_footer.php');
     break;
+    case 'saveHistory':
+        saveHistory($tabCalcul, $resultat);
+        $resultat;
+        $tabCalcul = str_replace(",","",$tabCalcul);
+        require('vues/view_header.php');
+        require('vues/view_calculatrice.php');
+        require('vues/view_footer.php');
+    break;
+
     //Afficher l'historique des résultat
     case "history":
         $historique = read();

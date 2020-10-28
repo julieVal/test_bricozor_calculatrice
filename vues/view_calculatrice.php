@@ -42,8 +42,8 @@ else{
 
         <!-- Nouveau visuel calculatrice -->
         <div class="calculatrice col-lg-8 mx-auto">
-            <div id="en_cour" class="text-light"></div>
-            <div class="calcul bg-light" id="calcul" style="height: 30px";> </div>
+            <div id="en_cour" class="text-light"><?php echo $tabCalcul ?></div>
+            <div class="calcul bg-light" id="calcul" style="height: 30px";> <?php echo $resultat ?></div>
             <div class="row">
                 <input type="button" class="btn btn-primary col-3" id="7" value="7">
                 <input type="button" class="btn btn-primary col-3" id="8" value="8">
@@ -73,21 +73,30 @@ else{
 
         </div>
         <!-- Affichage et enregistrement du résultat -->
-        <form action="<?php echo $_SERVER['PHP_SELF'].'?action=save'?>" method="post" class="form-group <?php echo $classResultat; ?> ">
-            
-            <input type="text" class="bg-light form-control mb-2" value="Le résulat est <?php echo $resultat;?>" disabled >
+        <div id="save" class="d-none">
+            <form action="<?php echo $_SERVER['PHP_SELF'].'?action=saveHistory'?>" method="post" class="form-group">
+                <input class="btn btn-info" type="submit" value="Enregistrer le résultat">
+                <input type="hidden" name="resultat" id="resultat" value="">
+                <input type="hidden" name="tabCalcul" id="tabCalcul" value="">
+            </form>
+        </div>
 
-            <input type="hidden" name="resultat" id="resultat" value="<?php echo $resultat;?>">
 
-            <input type="hidden" name="nbr1" id="nbr1" value="<?php echo $nbr1;?>">
-            <input type="hidden" name="nbr2" id="nbr2" value="<?php echo $nbr2;?>">
-            <input type="hidden" name="operator" id="operator" value="<?php echo $operator;?>">
+            <form action="<?php echo $_SERVER['PHP_SELF'].'?action=save'?>" method="post" class="form-group <?php echo $classResultat; ?> ">
+                
+                <input type="text" class="bg-light form-control mb-2" value="Le résulat est <?php echo $resultat;?>" disabled >
 
-            <!-- Enregistrer le résultat et retour à la calculatrice vide -->
-            <input class="btn btn-info" type="submit" value="Enregistrer le résultat">
+                <input type="hidden" name="resultat" id="resultat" value="<?php echo $resultat;?>">
 
-        </form>
+                <input type="hidden" name="nbr1" id="nbr1" value="<?php echo $nbr1;?>">
+                <input type="hidden" name="nbr2" id="nbr2" value="<?php echo $nbr2;?>">
+                <input type="hidden" name="operator" id="operator" value="<?php echo $operator;?>">
 
+                <!-- Enregistrer le résultat et retour à la calculatrice vide -->
+                <input class="btn btn-info" type="submit" value="Enregistrer le résultat">
+
+            </form>
+        
         <!-- formulaire d'accès à l'historique -->
         <form action="<?php echo $_SERVER['PHP_SELF'].'?action=history'?>" method="post" class="form-group ">
         

@@ -23,6 +23,14 @@ var small_calc =  document.getElementById("en_cour");
 var tCalcul = [];
 var nombre = "";
 
+    //Historique
+var save = document.getElementById("save");
+var inputResultat = document.getElementById("resultat");
+var tabCalcul = document.getElementById("tabCalcul");
+if(screen.innerHTML != null){
+    nombre = screen.innerHTML;
+}
+
     //booléen
 var bResultat =false;
 
@@ -120,7 +128,11 @@ calcResultat.addEventListener("click", function(){
 
 //Fonctions
 function calculer(tab){  
-    console.log(tab);
+    let tComplet = [];
+    for (let index = 0; index < tab.length; index++) {
+        tComplet[index] = tab[index];  
+    }
+
     if(tab.length >= 3) {
         while (tab.length > 1) {
             let nbr1 = parseFloat(tab[0]);
@@ -151,13 +163,18 @@ function calculer(tab){
                 break;
             }   
         }
+ 
+        save.className = "d-block"; 
+        tabCalcul.value = tComplet;
+        inputResultat.value = tab[0];
+    
         bResultat = true;
         return  tab[0];
     }         
 }
     
 function addOperator(tab, nb, operateur){
-    console.log(bResultat);
+    save.className = "d-none";
     let length = tab.length;
     if(nb.length != 0 ){
         if(length == 0){
@@ -170,7 +187,6 @@ function addOperator(tab, nb, operateur){
         else if(tab[length - 1] != "+" || tab[length - 1]!= "-" || tab[length - 1]!= "*"  || tab[length - 1]!= "/" ){
             if(!bResultat){ 
                 if(operateur != "="){
-                    console.log("entrer");
                     tab.push(nb);
                     tab.push(operateur);
                 } 
@@ -182,7 +198,6 @@ function addOperator(tab, nb, operateur){
                 bResultat=false;
                 tab.push(operateur);
             }
-            console.log(tab);
             small_calc.innerHTML = tab.join('');
             nb="";
             return nb;
@@ -190,7 +205,7 @@ function addOperator(tab, nb, operateur){
     }
     else{
         nb="";
-    }
+    } 
 }
 
 function addNumber(nb, value){
@@ -209,16 +224,5 @@ function addNumber(nb, value){
     }
     else{
         return nb;
-    }
- 
-    
-}
-
-function checkNombre(nb){
-    if(nb){
-        return true;
-    }
-    else{
-        return false;
     }
 }
