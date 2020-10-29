@@ -1,0 +1,34 @@
+.pave{
+   min-height: 70px;
+}
+
+.btn-light, .btn-dark, .btn-success, .btn-warning, .btn-info{
+    border-radius: 0%;
+}
+.calcul{
+    font-size: 2rem;
+}
+
+.history{
+    height: 100vh;
+}
+
+.historyList{
+    max-height: 30em;
+    overflow-y:scroll;
+}
+
+.action, #en_cours, #inputSave{
+    height: 50px;
+}
+   
+#save{
+    padding: 0;
+}
+
+#virgule{
+    border-right: 1px solid#28a745;
+    border-top: 1px solid #28a745;
+    font-weight: bolder;
+}
+
