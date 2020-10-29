@@ -15,7 +15,7 @@ var calcSous = document.getElementById("-");
 var calcDiv = document.getElementById("/");
 var calcMulti = document.getElementById("*");
 var calcResultat = document.getElementById("=");
-var calcDec = document.getElementById(".");
+var calcDec = document.getElementById("virgule");
 var btnSuppr = document.getElementById("delete");
 
     //Zone d'affichage

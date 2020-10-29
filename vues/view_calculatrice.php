@@ -50,7 +50,7 @@ if(isset($rechargement)){
                 <input type="button" class="btn btn-dark col-3" id="-" value="-">
             </div>
             <div class="pave row">
-                <input type="button" class="btn btn-light col-3" id="." value=".">
+                <input type="button" class="btn btn-light col-3" id="virgule" value=".">
                 <input type="button" class="btn btn-light col-3 border-light" id="0" value="0">
                 <input type="button" class="btn btn-success col-3" id="=" value="=">
                 <input type="button" class="btn btn-dark col-3" id="+" value="+">

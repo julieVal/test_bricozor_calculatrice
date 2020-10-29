@@ -18,19 +18,17 @@
     overflow-y:scroll;
 }
 
-.action{
+.action, #en_cours, #inputSave{
     height: 50px;
 }
-
-#en_cours{
-    height: 50px;
-}
-
-#inputSave{
-    height: 50px;
-}
-    
+   
 #save{
     padding: 0;
+}
+
+#virgule{
+    border-right: 1px solid#28a745;
+    border-top: 1px solid #28a745;
+    font-weight: bolder;
 }
 
