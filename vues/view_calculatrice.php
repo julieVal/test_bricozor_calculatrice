@@ -3,7 +3,11 @@
 ?>
 <div class="bg-secondary w-100" style="height: 100vh;">
     <div class="container-fluid col-md-6 mx-auto pt-5">
-        <h1>Ceci est une calculatrice</h1>
+        <div class="text-center">
+         <h1>Calculatrice</h1>
+         <p>Utilisez le pavé numérique de la page pour commencer à utiliser cette calculatrice.</p>
+        </div>
+        
 
         <!--  visuel calculatrice -->
         <div class="calculatrice col-lg-8 col-sm-10 mx-auto">
