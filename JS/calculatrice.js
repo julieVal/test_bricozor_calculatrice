@@ -161,7 +161,6 @@ btnSuppr.addEventListener("click",function(){
     //OUT : un nombre (tab[0])
 function calculer(tab){  
     let tComplet = [];
-    console.log(tab);
     //Sauvegarde du tableau complet
     for (let index = 0; index < tab.length; index++) {
         tComplet[index] = tab[index];  
@@ -186,7 +185,6 @@ function calculer(tab){
                 if( tab.indexOf("/") == -1 || tab.indexOf("*") < tab.indexOf("/")){
                     resultat = nbr1 * nbr2;
                     tab.splice(index-1,3,resultat);
-                    console.log(tab);
                 } 
                 //Sinon on fais la division
                 else{
@@ -196,11 +194,10 @@ function calculer(tab){
                     if (nbr2 == 0) {
                         resultat = 0;
                         tab.splice(index-1,3,resultat);
-                        console.log(tab);
+
                     } else {
                         resultat = nbr1 / nbr2;
                         tab.splice(index-1,3,resultat);
-                        console.log(tab);
                     }
                 }              
                 
@@ -217,8 +214,7 @@ function calculer(tab){
                     resultat = nbr1 / nbr2;
                     tab.splice(index-1,3,resultat);
                 }
-                console.log(tab);
-                
+               
             }
             //On fait une addition ou une soustraction
             else{
