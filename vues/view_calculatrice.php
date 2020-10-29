@@ -15,7 +15,7 @@
             </div>
             <!-- Pavé numérique-->
             <div class="row mt-2">
-                <input type="button" class="btn btn-warning col-6" id="delete" value="Supprimer">
+                <input type="button" class="btn btn-warning col-6" id="delete" value="Annuler">
             </div>
             <div class="pave row mt-1">
                 <input type="button" class="btn btn-light col-3" id="7" value="7">
