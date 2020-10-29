@@ -20,7 +20,7 @@ var btnSuppr = document.getElementById("delete");
 
     //Zone d'affichage
 var screen = document.getElementById("calcul");
-var small_calc =  document.getElementById("en_cour");
+var small_calc =  document.getElementById("en_cours");
 var tCalcul = [];
 var nombre = "";
 
@@ -31,7 +31,9 @@ var bResultat =false;
 var save = document.getElementById("save");
 var inputResultat = document.getElementById("resultat");
 var tabCalcul = document.getElementById("tabCalcul");
-var rechargement = document.getElementById("rechargement");
+
+var input = document.getElementById("inputSave");
+input.disabled = true;
         //Si l'écran n'est pas vide après un enregistrement
 if(rechargement.value == "true"){
     bResultat =true;
@@ -148,7 +150,7 @@ btnSuppr.addEventListener("click",function(){
     nombre ="";
     small_calc.innerHTML="";
     tCalcul = [];
-    save.className = "d-none";
+    //save.className = "d-none";
 });
 
 //Fonctions
@@ -198,13 +200,13 @@ function calculer(tab){
         }
  
         //Affichage du bouton de sauvegarde du calcule
-        save.className = "d-block"; 
+        //save.className = "d-block col-6 "; 
         tabCalcul.value = tComplet;
         inputResultat.value = tab[0];
     
         //On indique que ce quie st écrit est un résultat
         bResultat = true;
-
+        input.disabled = false;
         //retourne le dernier résultat
         return  tab[0];
     }         
@@ -215,8 +217,8 @@ function calculer(tab){
     //OUT : string (nb)
 function addOperator(tab, nb, operateur){
     //Masquer le bouton d'enregistrement du calcul
-    save.className = "d-none";
-
+    //save.className = "d-none";
+    
     let length = tab.length;
     //Si la chaine n'est pas vide
     if(nb.length != 0 ){
