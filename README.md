@@ -2,7 +2,7 @@
 
 ## Description du projet
 
-Un calculatrice réalisant les quatre opérations de base : additin, soustraction, multiplication et division
+Un calculatrice réalisant les quatre opérations de base : addition, soustraction, multiplication et division
 
 Elle offre la possiblité d'enregistrer le résultat d'un calcul et affiche l'historique des résultats enregistrés
 
@@ -38,15 +38,22 @@ Les calculs se font de gauche à droite sans tenir compte des priorités de calc
 Le bouton "Annuler" permet de vider les zones de texte et de démarrer un nouveau calcul.
 
 Le bouton "Enregistrer" est actif uniquement lorsqu'un résultat est affiché.
+Il permet d'enregistrer le calcul et le résultat.
 
 L'historique est consutable à tout moment.
+
+### V3
+Prise en charges des priorités de calcul.
+Les multiplications et divisions sont faites en priorités sur les additions et soustractions.
+
+Les multiplications et divisions sont exécutées sont l'ordre de lecture, de gauche à droite.
 
 ## Amélirations visées
 Possibilité d'écrire directement dans la zone de calcul,
 Possibilité d'entrer des valeurs négatives,
-Gérer les priorités de calcul,
 Améliorer la zone d'écriture du calcul (gérer les débordements),
 Afficher un message de confirmation lors de l'enregistrement d'un résultat,
 Enregistrer un résultat sans rechargement de page (AJAX ou JS),
-Possibilité de vider l'historique.
-
+Possibilité de vider l'historique,
+Possibilité de corriger la saisie du chiffre en cours,
+Enlever les zéros en fin de nombre (ex : 3.000 => 3)
