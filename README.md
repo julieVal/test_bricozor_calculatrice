@@ -54,4 +54,6 @@ Possibilité d'entrer des valeurs négatives,
 Améliorer la zone d'écriture du calcul (gérer les débordements),
 Afficher un message de confirmation lors de l'enregistrement d'un résultat,
 Enregistrer un résultat sans rechargement de page (AJAX ou JS),
-Possibilité de vider l'historique.
+Possibilité de vider l'historique,
+Possibilité de corriger la saisie du chiffre en cours,
+Enlever les zéros en fin de nombre (ex : 3.000 => 3)
