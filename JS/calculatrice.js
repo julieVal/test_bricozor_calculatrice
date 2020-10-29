@@ -161,6 +161,7 @@ btnSuppr.addEventListener("click",function(){
     //OUT : un nombre (tab[0])
 function calculer(tab){  
     let tComplet = [];
+    console.log(tab);
     //Sauvegarde du tableau complet
     for (let index = 0; index < tab.length; index++) {
         tComplet[index] = tab[index];  
@@ -168,40 +169,77 @@ function calculer(tab){
 
     // Vérification que le tableau contient au moin 3 éléments
     if(tab.length >= 3) {
-        //Tant que la taille du tableau est supérieure à 1, on effectue un calcul avec les  3 premiers élements
+        let nbr1 = "";
+        let nbr2 = "";
+        let operator = "";
+        let resultat = "";
+        let index = ""
+        //Tant que la taille du tableau est supérieure à 1, on effectue un calcul avec les  3 élements
         //on les supprime et les remplace par le réultat du calcul
         while (tab.length > 1) {
-            let nbr1 = parseFloat(tab[0]);
-            let nbr2 = parseFloat(tab[2]);
-            let operator = tab[1].trim();
-            let resultat = "";
-            switch (operator) {
-                case "+":
-                    resultat = nbr1 + nbr2;
-                    tab.splice(0,3,resultat);
-                break;
-                case "-":
-                    resultat = nbr1 - nbr2;
-                    tab.splice(0,3,resultat);
-                break;
-                case "*":
+            //Si il y a une multiplication dans le calcul
+            if(tab.indexOf("*")!= -1){
+                index = tab.indexOf("*");
+                nbr1 = parseFloat(tab[index-1]);
+                nbr2 = parseFloat(tab[index+1]);
+                //Si il n'y a pas de divion ou qu'elle est après la multiplication on effectue la multiplication
+                if( tab.indexOf("/") == -1 || tab.indexOf("*") < tab.indexOf("/")){
                     resultat = nbr1 * nbr2;
-                    tab.splice(0,3,resultat);
-                break;
-                case "/":
+                    tab.splice(index-1,3,resultat);
+                    console.log(tab);
+                } 
+                //Sinon on fais la division
+                else{
+                    index = tab.indexOf("/");
+                    nbr1 = parseFloat(tab[index-1]);
+                    nbr2 = parseFloat(tab[index+1]);
                     if (nbr2 == 0) {
                         resultat = 0;
-                        tab.splice(0,3,resultat);
+                        tab.splice(index-1,3,resultat);
+                        console.log(tab);
                     } else {
                         resultat = nbr1 / nbr2;
-                        tab.splice(0,3,resultat);
+                        tab.splice(index-1,3,resultat);
+                        console.log(tab);
                     }
-                break;
-            }   
+                }              
+                
+            }
+            //Si il ny une division (et pas de miltiplication) on fait la division
+            else if(tab.indexOf("/")!= -1){
+                index = tab.indexOf("/");
+                nbr1 = parseFloat(tab[index-1]);
+                nbr2 = parseFloat(tab[index+1]);
+                if (nbr2 == 0) {
+                    resultat = 0;
+                    tab.splice(index-1,3,resultat);
+                } else {
+                    resultat = nbr1 / nbr2;
+                    tab.splice(index-1,3,resultat);
+                }
+                console.log(tab);
+                
+            }
+            //On fait une addition ou une soustraction
+            else{
+                nbr1 = parseFloat(tab[0]);
+                nbr2 = parseFloat(tab[2]);
+                operator = tab[1].trim();
+                resultat = "";
+                switch (operator) {
+                    case "+":
+                        resultat = nbr1 + nbr2;
+                        tab.splice(0,3,resultat);
+                    break;
+                    case "-":
+                        resultat = nbr1 - nbr2;
+                        tab.splice(0,3,resultat);
+                    break;
+                }
+            }      
         }
  
-        //Affichage du bouton de sauvegarde du calcule
-        //save.className = "d-block col-6 "; 
+        //Affichage du bouton de sauvegarde du calcule 
         tabCalcul.value = tComplet;
         inputResultat.value = tab[0];
     
