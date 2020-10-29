@@ -236,9 +236,11 @@ function calculer(tab){
         }
  
         //Affichage du bouton de sauvegarde du calcule 
+        tComplet.push(' = ');
         tabCalcul.value = tComplet;
         inputResultat.value = tab[0];
-    
+        //Ajout signe égal
+        small_calc.innerHTML = tComplet.join('');
         //On indique que ce quie st écrit est un résultat
         bResultat = true;
         //Activation du bouton enregistrer
