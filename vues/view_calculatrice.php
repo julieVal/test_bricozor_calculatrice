@@ -66,4 +66,6 @@ if(isset($rechargement)){
             </form>
         </div>
     </div>
+    <input type="hidden" name="" id ="rechargement" value="<?php echo $rechargement; ?>">
+
 </div>         

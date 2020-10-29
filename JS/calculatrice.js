@@ -31,9 +31,6 @@ var bResultat =false;
 var save = document.getElementById("save");
 var inputResultat = document.getElementById("resultat");
 var tabCalcul = document.getElementById("tabCalcul");
-
-var input = document.getElementById("inputSave");
-input.disabled = true;
         //Si l'écran n'est pas vide après un enregistrement
 if(rechargement.value == "true"){
     bResultat =true;
@@ -41,6 +38,10 @@ if(rechargement.value == "true"){
     nombre = screen.innerHTML;
 }
 
+//Bouton enregistrement
+var input = document.getElementById("inputSave");
+    //Désactivé par défaut
+input.disabled = true;
 
 //Abonnement des boutons
     //Chiffres
@@ -150,7 +151,6 @@ btnSuppr.addEventListener("click",function(){
     nombre ="";
     small_calc.innerHTML="";
     tCalcul = [];
-    //save.className = "d-none";
 });
 
 //Fonctions
@@ -206,6 +206,7 @@ function calculer(tab){
     
         //On indique que ce quie st écrit est un résultat
         bResultat = true;
+        //Activation du bouton enregistrer
         input.disabled = false;
         //retourne le dernier résultat
         return  tab[0];
@@ -216,9 +217,9 @@ function calculer(tab){
     //IN: tableau (tab),  2 chaines de caracteres (nb et operator)
     //OUT : string (nb)
 function addOperator(tab, nb, operateur){
-    //Masquer le bouton d'enregistrement du calcul
-    //save.className = "d-none";
-    
+    //désactive le bouton enregistrer
+    input.disabled = true;
+
     let length = tab.length;
     //Si la chaine n'est pas vide
     if(nb.length != 0 ){
@@ -273,6 +274,8 @@ function addOperator(tab, nb, operateur){
     //IN: string (nb et value)
     //OUT : string (nb)
 function addNumber(nb, value){
+    //désactive le bouton enregistrer
+    input.disabled = true;
     //Initilisation d'un booléen
     let flag =false;
     //Si la valeur n'est pas une décimale
@@ -296,6 +299,3 @@ function addNumber(nb, value){
         return nb;
     }
 }
-
-
-console.log(bResultat)
