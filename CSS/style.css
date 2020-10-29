@@ -2,7 +2,7 @@
    min-height: 70px;
 }
 
-.btn-light, .btn-dark, .btn-success, .btn-warning{
+.btn-light, .btn-dark, .btn-success, .btn-warning, .btn-info{
     border-radius: 0%;
 }
 

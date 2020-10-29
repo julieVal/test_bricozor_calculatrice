@@ -53,11 +53,9 @@
         </div>
         
         <!-- formulaire d'accès à l'historique -->
-        <div class="mx-auto col-6 mt-3">
-            <form action="<?php echo $_SERVER['PHP_SELF'].'?action=history'?>" method="post" class="form-group ">
-            
-                <input class="btn btn-info" type="submit" value="Voir l'historique des résultats">
-                
+        <div class="col-lg-8 mt-3 text-center mx-auto">
+            <form action="<?php echo $_SERVER['PHP_SELF'].'?action=history'?>" method="post" class="">
+                <input class="btn btn-info col-10 " type="submit" value="Voir l'historique des résultats"> 
             </form>
         </div>
     </div>
