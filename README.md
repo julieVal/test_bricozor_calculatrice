@@ -33,6 +33,8 @@ Les calculs se font uniquement via le pavé numérique.
 
 L'utilisateur ne peut entrer que des nombres (entiers ou décimaux) positifs.
 
+Les calculs se font de gauche à droite sans tenir compte des priorités de calcul.
+
 Le bouton "Annuler" permet de vider les zones de texte et de démarrer un nouveau calcul.
 
 Le bouton "Enregistrer" est actif uniquement lorsqu'un résultat est affiché.
