@@ -62,7 +62,7 @@ if(isset($rechargement)){
         <!-- formulaire d'accès à l'historique -->
         <div class="col-lg-8 mt-3 text-center mx-auto">
             <form action="<?php echo $_SERVER['PHP_SELF'].'?action=history'?>" method="post" class="">
-                <input class="btn btn-info col-10 " type="submit" value="Voir l'historique des résultats"> 
+                <input class="btn btn-info col-10 " type="submit" value="Voir l'historique"> 
             </form>
         </div>
     </div>
