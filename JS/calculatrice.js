@@ -31,8 +31,9 @@ var bResultat =false;
 var save = document.getElementById("save");
 var inputResultat = document.getElementById("resultat");
 var tabCalcul = document.getElementById("tabCalcul");
+var rechargement = document.getElementById("rechargement");
         //Si l'écran n'est pas vide après un enregistrement
-if(screen.value != ""){
+if(rechargement.value == "true"){
     bResultat =true;
     //Initilialiser la variable avec le contenu de l'écran
     nombre = screen.innerHTML;
@@ -293,3 +294,6 @@ function addNumber(nb, value){
         return nb;
     }
 }
+
+
+console.log(bResultat)

@@ -1,5 +1,7 @@
 <?php
-
+if(isset($rechargement)){
+    $rechargement =$rechargement;
+}
 ?>
 <div class="bg-secondary w-100" style="height: 100vh;">
     <div class="container-fluid col-md-6 mx-auto pt-5">
@@ -55,6 +57,6 @@
             <input class="btn btn-info" type="submit" value="Voir l'historique des résultats">
             
         </form>
-
+        <input type="hidden" name="" id ="rechargement" value="<?php echo $rechargement; ?>">
     </div>
 </div>         

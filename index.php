@@ -23,12 +23,14 @@ else{
 switch ($action) {
     //accueil de la calulatrice vide
     case 'calculatrice':
+        $rechargement = "false";
         require('vues/view_header.php');
         require('vues/view_calculatrice.php');
         require('vues/view_footer.php');
     break;
     //Sauvegarder un résultat
     case 'saveHistory':
+        $rechargement = "true";
         saveHistory($tabCalcul, $resultat);
         $resultat;
         $tabCalcul = str_replace(",","",$tabCalcul);
@@ -42,5 +44,5 @@ switch ($action) {
         require('vues/view_header.php');
         require('vues/view_historique.php');
         require('vues/view_footer.php');
-
+    break;
 }
