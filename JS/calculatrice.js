@@ -24,23 +24,27 @@ var small_calc =  document.getElementById("en_cour");
 var tCalcul = [];
 var nombre = "";
 
+    //booléen
+var bResultat =false;
+
     //Historique
 var save = document.getElementById("save");
 var inputResultat = document.getElementById("resultat");
 var tabCalcul = document.getElementById("tabCalcul");
-if(screen.innerHTML != null){
+        //Si l'écran n'est pas vide après un enregistrement
+if(screen.innerHTML != ""){
+    //Initilialiser la variable avec le contenu de l'écran
     nombre = screen.innerHTML;
 }
 
-    //booléen
-var bResultat =false;
 
 //Abonnement des boutons
+    //Chiffres
+        //Ajout d'un chiffre que si ce n'est pas un résultat dans la zone d'affichage 
 calc1.addEventListener("click", function(){
     if(!bResultat){
         nombre = addNumber(nombre, calc1.value) ;
-    }
-    
+    }   
 });
 calc2.addEventListener("click", function(){
     if(!bResultat){
@@ -87,12 +91,14 @@ calc0.addEventListener("click", function(){
         nombre = addNumber(nombre, calc0.value) ;
     }
 });
+
+    //Opérateurs
+        //ajout de l'opérateur si l'écran n'est pas vide
 calcAdd.addEventListener("click", function(){
     if(screen.textContent.trim().length != 0){
         nombre = addOperator(tCalcul, nombre, calcAdd.value);
         screen.innerHTML = nombre;
     }
-
 });
 calcSous.addEventListener("click", function(){
     if(screen.textContent.trim().length != 0){
@@ -112,13 +118,18 @@ calcMulti.addEventListener("click", function(){
         screen.innerHTML = nombre;
     }
 });
+
+    //Décimale
+        //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
 calcDec.addEventListener("click", function(){
     if(nombre && !bResultat){
         nombre = addNumber(nombre, calcDec.value);
         screen.innerHTML = nombre;
-    }
-    
+    } 
 });
+
+    //Bouton égale "="
+        //Les fonctions sont lancées si ce n'est pas un résultat qui est affiché et si il y a au moin 2 éléments dans le tableau de calcul
 calcResultat.addEventListener("click", function(){
     if(!bResultat && nombre && tCalcul.length>=2){
         nombre = addOperator(tCalcul, nombre, calcResultat.value);
@@ -127,23 +138,33 @@ calcResultat.addEventListener("click", function(){
     }
 });
 
+    //Bouton supprimer
+        //vide les zones de texte et réinitialise les variables
 btnSuppr.addEventListener("click",function(){
+    bResultat =false;
     screen.innerHTML = "";
     nombre ="";
     small_calc.innerHTML="";
     tCalcul = [];
     save.className = "d-none";
-
 });
 
 //Fonctions
+
+    //Effectue un calcul sur les 3 premiers élements du tableau
+    //IN : un tableau (tab)
+    //OUT : un nombre (tab[0])
 function calculer(tab){  
     let tComplet = [];
+    //Sauvegarde du tableau complet
     for (let index = 0; index < tab.length; index++) {
         tComplet[index] = tab[index];  
     }
 
+    // Vérification que le tableau contient au moin 3 éléments
     if(tab.length >= 3) {
+        //Tant que la taille du tableau est supérieure à 1, on effectue un calcul avec les  3 premiers élements
+        //on les supprime et les remplace par le réultat du calcul
         while (tab.length > 1) {
             let nbr1 = parseFloat(tab[0]);
             let nbr2 = parseFloat(tab[2]);
@@ -174,65 +195,96 @@ function calculer(tab){
             }   
         }
  
+        //Affichage du bouton de sauvegarde du calcule
         save.className = "d-block"; 
         tabCalcul.value = tComplet;
         inputResultat.value = tab[0];
     
+        //On indique que ce quie st écrit est un résultat
         bResultat = true;
+
+        //retourne le dernier résultat
         return  tab[0];
     }         
 }
-    
+
+    //Ajouter un opérateur
+    //IN: tableau (tab),  2 chaines de caracteres (nb et operator)
+    //OUT : string (nb)
 function addOperator(tab, nb, operateur){
+    //Masquer le bouton d'enregistrement du calcul
     save.className = "d-none";
+
     let length = tab.length;
+    //Si la chaine n'est pas vide
     if(nb.length != 0 ){
+        //Si le tableau est vide
         if(length == 0){
+            //Ajouter au tableau le nombre et l'operateur
             tab.push(nb);
             tab.push(operateur);
+            //Afficher le contenu du tableau au dessus
             small_calc.innerHTML = tab.join('');
+            //Vider le contenu de l'ecran et le retourner
             nb="";
             return nb;
         }
+        //Si le tableau contient des éléments dont le dernier n'est pas un opérateur(+ - * /)
         else if(tab[length - 1] != "+" || tab[length - 1]!= "-" || tab[length - 1]!= "*"  || tab[length - 1]!= "/" ){
+            //Si ce n'est pas un résultat affiché
             if(!bResultat){ 
+                //et si l'opérateur n'est pas "="
                 if(operateur != "="){
+                    //On ajoute le nombre entré et l'opérateur
                     tab.push(nb);
                     tab.push(operateur);
                 } 
+                //Sinon,  on ajoute que le nombre
                 else{
                     tab.push(nb);
                 }
             }
+            //Si c'est un résultat qui est affiché
             else{
-                bResultat=false;
+                //On ajoute l'opérateur
                 tab.push(operateur);
+                //on passe le booléen à false (ce n'est plus un résultat affiché)
+                bResultat=false;
             }
+            //Afficher le contenu du tableau au dessus
             small_calc.innerHTML = tab.join('');
+            //Vider le contenu de l'ecran et le retourner
             nb="";
             return nb;
         }
     }
-    else{
-        nb="";
-    } 
+
 }
 
+    //Ajouter un nombre
+    //IN: string (nb et value)
+    //OUT : string (nb)
 function addNumber(nb, value){
+    //Initilisation d'un booléen
     let flag =false;
+    //Si la valeur n'est pas une décimale
     if(value != "."){
        flag = true;
     }
+    //Si une décimale n'est pas déjà présente dans la chaine nb
     else if(nb.indexOf(".") == -1){
-        console.log("virgule");
         flag = true;
     }
+    //Booléen vaut true
     if(flag){
+        //On concatène la value dans nb
         nb+=value ;
+        //Affichage du contenu et on le retourne
         screen.innerHTML = nb; 
         return nb;
     }
     else{
+        //Retourne nb sans modification
         return nb;
     }
 }
