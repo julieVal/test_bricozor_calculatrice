@@ -32,7 +32,8 @@ var save = document.getElementById("save");
 var inputResultat = document.getElementById("resultat");
 var tabCalcul = document.getElementById("tabCalcul");
         //Si l'écran n'est pas vide après un enregistrement
-if(screen.innerHTML != ""){
+if(screen.value != ""){
+    bResultat =true;
     //Initilialiser la variable avec le contenu de l'écran
     nombre = screen.innerHTML;
 }
@@ -218,8 +219,11 @@ function addOperator(tab, nb, operateur){
     let length = tab.length;
     //Si la chaine n'est pas vide
     if(nb.length != 0 ){
+        
         //Si le tableau est vide
         if(length == 0){
+            //Dans le cas d'un rechergement après un enregistrement,on passe le booléen à false
+            bResultat=false;
             //Ajouter au tableau le nombre et l'operateur
             tab.push(nb);
             tab.push(operateur);
@@ -227,6 +231,7 @@ function addOperator(tab, nb, operateur){
             small_calc.innerHTML = tab.join('');
             //Vider le contenu de l'ecran et le retourner
             nb="";
+            
             return nb;
         }
         //Si le tableau contient des éléments dont le dernier n'est pas un opérateur(+ - * /)
