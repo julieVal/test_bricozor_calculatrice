@@ -1,0 +1,9 @@
+.pave{
+   min-height: 70px;
+}
+
+.btn-light, .btn-dark, .btn-success{
+    border-radius: 0%;
+}
+
+

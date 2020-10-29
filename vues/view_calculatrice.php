@@ -6,37 +6,40 @@
         <h1>Ceci est une calculatrice</h1>
 
         <!--  visuel calculatrice -->
-        <div class="calculatrice col-lg-8 mx-auto">
+        <div class="calculatrice col-lg-8 col-sm-10 mx-auto">
             <!-- Zone d'affichage-->
-            <div id="en_cour" class="text-light"><?php echo $tabCalcul ?></div>
+            <div id="en_cour" class="text-light" style="height: 30px";><?php echo $tabCalcul ?></div>
             <div class="row">
-                <div class="calcul bg-light col-8" id="calcul" style="height: 30px"; value="<?php echo $resultat ?>"> <?php echo $resultat ?></div>
-                <input type="button" class="btn btn-warning" id="delete" value="Supprimer">
+                <div class="calcul bg-light col-10 mx-auto" id="calcul" style="height: 50px"; value="<?php echo $resultat ?>"> <?php echo $resultat ?></div>
+               
             </div>
             <!-- Pavé numérique-->
-            <div class="row">
-                <input type="button" class="btn btn-primary col-3" id="7" value="7">
-                <input type="button" class="btn btn-primary col-3" id="8" value="8">
-                <input type="button" class="btn btn-primary col-3" id="9" value="9">
-                <input type="button" class="btn btn-primary col-3" id="/" value="/">
+            <div class="row mt-2">
+                <input type="button" class="btn btn-warning col-6" id="delete" value="Supprimer">
             </div>
-            <div class="row">
-                <input type="button" class="btn btn-primary col-3" id="4" value="4">
-                <input type="button" class="btn btn-primary col-3" id="5" value="5">
-                <input type="button" class="btn btn-primary col-3" id="6" value="6">
-                <input type="button" class="btn btn-primary col-3" id="*" value="*">
+            <div class="pave row mt-1">
+                <input type="button" class="btn btn-light col-3" id="7" value="7">
+                <input type="button" class="btn btn-light col-3" id="8" value="8">
+                <input type="button" class="btn btn-light col-3" id="9" value="9">
+                <input type="button" class="btn btn-dark col-3" id="/" value="/">
             </div>
-            <div class="row">
-                <input type="button" class="btn btn-primary col-3" id="1" value="1">
-                <input type="button" class="btn btn-primary col-3" id="2" value="2">
-                <input type="button" class="btn btn-primary col-3" id="3" value="3">
-                <input type="button" class="btn btn-primary col-3" id="-" value="-">
+            <div class="pave row">
+                <input type="button" class="btn btn-light col-3" id="4" value="4">
+                <input type="button" class="btn btn-light col-3" id="5" value="5">
+                <input type="button" class="btn btn-light col-3" id="6" value="6">
+                <input type="button" class="btn btn-dark col-3" id="*" value="*">
             </div>
-            <div class="row">
-                <input type="button" class="btn btn-primary col-3" id="." value=".">
-                <input type="button" class="btn btn-primary col-3" id="0" value="0">
-                <input type="button" class="btn btn-primary col-3" id="=" value="=">
-                <input type="button" class="btn btn-primary col-3" id="+" value="+">
+            <div class=" pave row">
+                <input type="button" class="btn btn-light col-3" id="1" value="1">
+                <input type="button" class="btn btn-light col-3" id="2" value="2">
+                <input type="button" class="btn btn-light col-3" id="3" value="3">
+                <input type="button" class="btn btn-dark col-3" id="-" value="-">
+            </div>
+            <div class="pave row">
+                <input type="button" class="btn btn-light col-3" id="." value=".">
+                <input type="button" class="btn btn-light col-3 border-light" id="0" value="0">
+                <input type="button" class="btn btn-success col-3" id="=" value="=">
+                <input type="button" class="btn btn-dark col-3" id="+" value="+">
             </div>
         </div>
 
@@ -50,11 +53,12 @@
         </div>
         
         <!-- formulaire d'accès à l'historique -->
-        <form action="<?php echo $_SERVER['PHP_SELF'].'?action=history'?>" method="post" class="form-group ">
-        
-            <input class="btn btn-info" type="submit" value="Voir l'historique des résultats">
+        <div class="mx-auto col-6 mt-3">
+            <form action="<?php echo $_SERVER['PHP_SELF'].'?action=history'?>" method="post" class="form-group ">
             
-        </form>
-
+                <input class="btn btn-info" type="submit" value="Voir l'historique des résultats">
+                
+            </form>
+        </div>
     </div>
 </div>         
