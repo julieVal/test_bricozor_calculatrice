@@ -5,5 +5,7 @@
 .btn-light, .btn-dark, .btn-success, .btn-warning, .btn-info{
     border-radius: 0%;
 }
-
+.calcul{
+    font-size: 2rem;
+}
 

@@ -12,9 +12,9 @@
         <!--  visuel calculatrice -->
         <div class="calculatrice col-lg-8 col-sm-10 mx-auto">
             <!-- Zone d'affichage-->
-            <div id="en_cour" class="text-light" style="height: 30px";><?php echo $tabCalcul ?></div>
+            <div id="en_cour" class="en_cour col-10 mx-auto text-light text-right" style="height: 50px";><?php echo $tabCalcul ?></div>
             <div class="row">
-                <div class="calcul bg-light col-10 mx-auto" id="calcul" style="height: 50px"; value="<?php echo $resultat ?>"> <?php echo $resultat ?></div>
+                <div class="calcul bg-light col-10 mx-auto text-right font-weight-bold" id="calcul" style="height: 50px"; value="<?php echo $resultat ?>"> <?php echo $resultat ?></div>
                
             </div>
             <!-- Pavé numérique-->

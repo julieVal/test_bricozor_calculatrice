@@ -3,7 +3,7 @@
         <div class="col-md-6 mx-auto">
             <h1>Historique des résultats</h1>
             <!-- affichage de l'historique -->
-            <div class="bg-light text-dark rounded">
+            <div class="history bg-light text-dark rounded">
                 <p class="pl-2 pt-1"><?php echo $historique; ?></p>
             </div>
 
