@@ -9,3 +9,11 @@
     font-size: 2rem;
 }
 
+.history{
+    height: 100vh;
+}
+
+.historyList{
+    max-height: 30em;
+    overflow-y:scroll;
+}
