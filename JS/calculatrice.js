@@ -151,6 +151,7 @@ btnSuppr.addEventListener("click",function(){
     nombre ="";
     small_calc.innerHTML="";
     tCalcul = [];
+    input.disabled = true;
 });
 
 //Fonctions
