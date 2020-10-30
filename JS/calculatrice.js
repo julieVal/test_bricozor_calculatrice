@@ -10,8 +10,8 @@ var btnSuppr = document.getElementById("delete");
 
     
     //Zone d'affichage
-    var screen = document.getElementById("calcul");
-    var small_calc =  document.getElementById("en_cours");
+var screen = document.getElementById("calcul");
+var small_calc =  document.getElementById("en_cours");
 var tCalcul = [];
 var nombre = "";
 //booléen
@@ -46,7 +46,7 @@ input.disabled = true;
                     //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
             else if(nombre){
                 nombre = addNumber(nombre, item.value);
-                screen.innerHTML = nombre;
+                
             }  
         }
     });
@@ -97,16 +97,17 @@ document.addEventListener('keyup', (event) => {
             //Décimale
                 //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
             else if(nombre){
-                nombre = addNumber(nombre, touche);
-                screen.innerHTML = nombre;
+                    nombre = addNumber(nombre, touche);                    
+                
             }
+            
         }
     }
     else if(touche == "+" || touche =="-" || touche == "*" || touche == "/"){
-        
             if(screen.textContent.trim().length != 0){
                 nombre = addOperator(tCalcul, nombre, touche);
                 screen.innerHTML = nombre;
+
             }
         }
         //Si l'opérateur est "="
