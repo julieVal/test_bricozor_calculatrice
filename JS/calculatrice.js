@@ -85,6 +85,7 @@ btnSuppr.addEventListener("click",function(){
 });
 
 //Pave numérique du clavier
+
 document.addEventListener('keyup', (event) => {
     const touche = event.key;
     
@@ -95,13 +96,14 @@ document.addEventListener('keyup', (event) => {
             } 
             //Décimale
                 //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
-        else if(nombre){
-            nombre = addNumber(nombre, touche);
-            screen.innerHTML = nombre;
-        }
+            else if(nombre){
+                nombre = addNumber(nombre, touche);
+                screen.innerHTML = nombre;
+            }
         }
     }
     else if(touche == "+" || touche =="-" || touche == "*" || touche == "/"){
+        
             if(screen.textContent.trim().length != 0){
                 nombre = addOperator(tCalcul, nombre, touche);
                 screen.innerHTML = nombre;
@@ -115,14 +117,17 @@ document.addEventListener('keyup', (event) => {
             nombre = calculer(tCalcul);
             screen.innerHTML = nombre;      
         }
-        
     }
-       
-    
-
-    
+         
 }, false);
 
+    //Sous Firefox désactivation du raccourcis clavier sur la touche "/"
+document.addEventListener('keydown', (event) => {
+    const touche = event.key;
+    if(touche == "/"){
+        event.preventDefault();
+    }
+}, false);
 
 //Fonctions
 
