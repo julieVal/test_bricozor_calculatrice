@@ -6,9 +6,12 @@ var operator = document.getElementsByClassName("operator");
 
 var btnSuppr = document.getElementById("delete");
 
-//Zone d'affichage
-var screen = document.getElementById("calcul");
-var small_calc =  document.getElementById("en_cours");
+    //Pave numérique du clavier
+
+    
+    //Zone d'affichage
+    var screen = document.getElementById("calcul");
+    var small_calc =  document.getElementById("en_cours");
 var tCalcul = [];
 var nombre = "";
 //booléen
@@ -31,7 +34,7 @@ var input = document.getElementById("inputSave");
 input.disabled = true;
 
 //Abonnement des boutons
-    //Chiffres
+//Chiffres
         //Ajout d'un chiffre que si ce n'est pas un résultat dans la zone d'affichage 
     for (const item of numeric) {
         item.addEventListener("click", function(){
@@ -80,6 +83,46 @@ btnSuppr.addEventListener("click",function(){
     tCalcul = [];
     input.disabled = true;
 });
+
+//Pave numérique du clavier
+document.addEventListener('keyup', (event) => {
+    const touche = event.key;
+    
+    if ((touche>= 0 && touche<= 9) || touche ==".") {
+        if(!bResultat){
+            if(touche != "."){
+                nombre = addNumber(nombre, touche) ;
+            } 
+            //Décimale
+                //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
+        else if(nombre){
+            nombre = addNumber(nombre, touche);
+            screen.innerHTML = nombre;
+        }
+        }
+    }
+    else if(touche == "+" || touche =="-" || touche == "*" || touche == "/"){
+            if(screen.textContent.trim().length != 0){
+                nombre = addOperator(tCalcul, nombre, touche);
+                screen.innerHTML = nombre;
+            }
+        }
+        //Si l'opérateur est "="
+    else if (touche == "=" || touche =='Enter') {
+        let resulatoperator = "=";
+        if(!bResultat && nombre && tCalcul.length>=2){
+            nombre = addOperator(tCalcul, nombre, resulatoperator);
+            nombre = calculer(tCalcul);
+            screen.innerHTML = nombre;      
+        }
+        
+    }
+       
+    
+
+    
+}, false);
+
 
 //Fonctions
 
