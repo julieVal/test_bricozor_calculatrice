@@ -1,54 +1,43 @@
 //Pointer les éléments du DOM
     //Boutons de la calculatrice
-
 var numeric = document.getElementsByClassName("numeric");
 var operator = document.getElementsByClassName("operator");
-
 var btnSuppr = document.getElementById("delete");
-
 
     //Zone d'affichage
 var screen = document.getElementById("calcul");
 var small_calc =  document.getElementById("en_cours");
-var tCalcul = [];
-var nombre = "";
-//booléen
-var bResultat =false;
 
-
-
-//Historique
+    //Historique
 var save = document.getElementById("save");
 var inputResultat = document.getElementById("resultat");
 var tabCalcul = document.getElementById("tabCalcul");
-//Si l'écran n'est pas vide après un enregistrement
+
+    //Bouton enregistrement
+var input = document.getElementById("inputSave");
+
+    //Si l'écran n'est pas vide après un enregistrement
 if(rechargement.value == "true"){
     bResultat =true;
     //Initilialiser la variable avec le contenu de l'écran
     nombre = screen.innerHTML;
 }
-
-//Bouton enregistrement
-var input = document.getElementById("inputSave");
-//Désactivé par défaut
-input.disabled = true;
+else{
+    initialise();
+}
 
 
 //Abonnement des boutons
 
-//Bouton supprimer
+    //Bouton supprimer
     //vide les zones de texte et réinitialise les variables
-    btnSuppr.addEventListener("click",function(){
-        bResultat = false;
-        screen.innerHTML = "";
-        nombre ="";
-        small_calc.innerHTML="";
-        tCalcul = [];
-        input.disabled = true;
-        btnSuppr.blur();
-    });
+btnSuppr.addEventListener("click",function(){
+    initialise();
+    //On enlève le focus pour pouvoir utiliser la touche entrée du clavier
+    btnSuppr.blur();
+});
 
-//Chiffres
+    //Chiffres à l'écran
         //Ajout d'un chiffre que si ce n'est pas un résultat dans la zone d'affichage 
 for (const item of numeric) {
     item.addEventListener("click", function(){
@@ -57,14 +46,12 @@ for (const item of numeric) {
                 nombre = addNumber(nombre, item.value) ;
             } 
             //Décimale
-                //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
+            //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
             else if(nombre){
                 nombre = addNumber(nombre, item.value);
-                
             }  
         }
     });
-    
 }
 
     //Opérateurs
@@ -85,18 +72,14 @@ for (const item of operator) {
                 screen.innerHTML = nombre;      
             }
         } 
-        
     });
-   
 }
-
 
 //Pave numérique du clavier
 
 document.addEventListener('keyup', (event) => {
-
     const touche = event.key;
-
+    //Chiffres et décimale
     if ((touche>= 0 && touche<= 9) || touche ==".") {
         if(!bResultat){
             if(touche != "."){
@@ -107,16 +90,16 @@ document.addEventListener('keyup', (event) => {
             else if(nombre){
                 nombre = addNumber(nombre, touche);                    
             }
-            
         }
     }
+    //opérateurs
     else if(touche == "+" || touche =="-" || touche == "*" || touche == "/" ){
         if(screen.textContent.trim().length != 0){
             nombre = addOperator(tCalcul, nombre, touche);
             screen.innerHTML = nombre;
         }
     }
-    //Si l'opérateur est "="
+        //Si l'opérateur est "="
     else if (touche == "=" || touche == 'Enter') {
         console.log(tCalcul);
         let resulatoperator = "=";
@@ -127,17 +110,15 @@ document.addEventListener('keyup', (event) => {
             screen.innerHTML = nombre;      
         }
     }
-});
+}, false);
     
-    
-    
-    //Sous Firefox désactivation du raccourcis clavier sur la touche "/"
+    //Sous Firefox désactivation du raccourcis clavier sur la touche "/" (recherche rapide)
 document.addEventListener('keydown', (event) => {
     const touche = event.key;
     if(touche == "/"){
         event.preventDefault();
     }
-}, false);
+});
     
 
 
@@ -323,4 +304,14 @@ function addNumber(nb, value){
         //Retourne nb sans modification
         return nb;
     }
+}
+
+//Initialiser les variables
+function initialise(){
+    bResultat = false;
+    screen.innerHTML = "";
+    nombre ="";
+    small_calc.innerHTML="";
+    tCalcul = [];
+    input.disabled = true;
 }
