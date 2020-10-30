@@ -6,9 +6,7 @@ var operator = document.getElementsByClassName("operator");
 
 var btnSuppr = document.getElementById("delete");
 
-    //Pave numérique du clavier
 
-    
     //Zone d'affichage
 var screen = document.getElementById("calcul");
 var small_calc =  document.getElementById("en_cours");
@@ -16,6 +14,8 @@ var tCalcul = [];
 var nombre = "";
 //booléen
 var bResultat =false;
+
+
 
 //Historique
 var save = document.getElementById("save");
@@ -33,95 +33,104 @@ var input = document.getElementById("inputSave");
 //Désactivé par défaut
 input.disabled = true;
 
+
 //Abonnement des boutons
+
+//Bouton supprimer
+    //vide les zones de texte et réinitialise les variables
+    btnSuppr.addEventListener("click",function(){
+        bResultat = false;
+        screen.innerHTML = "";
+        nombre ="";
+        small_calc.innerHTML="";
+        tCalcul = [];
+        input.disabled = true;
+        btnSuppr.blur();
+    });
+
 //Chiffres
         //Ajout d'un chiffre que si ce n'est pas un résultat dans la zone d'affichage 
-    for (const item of numeric) {
-        item.addEventListener("click", function(){
-            if(!bResultat){
-                if(item.value != "."){
-                    nombre = addNumber(nombre, item.value) ;
-                } 
-                //Décimale
-                    //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
+for (const item of numeric) {
+    item.addEventListener("click", function(){
+        if(!bResultat){ 
+            if(item.value != "."){
+                nombre = addNumber(nombre, item.value) ;
+            } 
+            //Décimale
+                //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
             else if(nombre){
                 nombre = addNumber(nombre, item.value);
                 
             }  
         }
     });
+    
 }
 
     //Opérateurs
-    for (const item of operator) {
-        item.addEventListener("click", function(){
-            //ajout de l'opérateur si l'écran n'est pas vide
-            if(item.value != "="){
-                if(screen.textContent.trim().length != 0){
-                    nombre = addOperator(tCalcul, nombre, item.value);
-                    screen.innerHTML = nombre;
-                }
+for (const item of operator) {
+    item.addEventListener("click", function(){
+        //ajout de l'opérateur si l'écran n'est pas vide
+        if(item.value != "="){
+            if(screen.textContent.trim().length != 0){
+                nombre = addOperator(tCalcul, nombre, item.value);
+                screen.innerHTML = nombre;
             }
+        }
         //Si l'opérateur est "="
-            else{
-                if(!bResultat && nombre && tCalcul.length>=2){
-                    nombre = addOperator(tCalcul, nombre, item.value);
-                    nombre = calculer(tCalcul);
-                    screen.innerHTML = nombre;      
-                }
-            } 
-        })
-    }
+        else{
+            if(!bResultat && nombre && tCalcul.length>=2){
+                nombre = addOperator(tCalcul, nombre, item.value);
+                nombre = calculer(tCalcul);
+                screen.innerHTML = nombre;      
+            }
+        } 
+        
+    });
+   
+}
 
-    //Bouton supprimer
-        //vide les zones de texte et réinitialise les variables
-btnSuppr.addEventListener("click",function(){
-    bResultat =false;
-    screen.innerHTML = "";
-    nombre ="";
-    small_calc.innerHTML="";
-    tCalcul = [];
-    input.disabled = true;
-});
 
 //Pave numérique du clavier
 
 document.addEventListener('keyup', (event) => {
+
     const touche = event.key;
-    
+
     if ((touche>= 0 && touche<= 9) || touche ==".") {
         if(!bResultat){
             if(touche != "."){
                 nombre = addNumber(nombre, touche) ;
             } 
             //Décimale
-                //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
+            //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
             else if(nombre){
-                    nombre = addNumber(nombre, touche);                    
-                
+                nombre = addNumber(nombre, touche);                    
             }
             
         }
     }
-    else if(touche == "+" || touche =="-" || touche == "*" || touche == "/"){
-            if(screen.textContent.trim().length != 0){
-                nombre = addOperator(tCalcul, nombre, touche);
-                screen.innerHTML = nombre;
-
-            }
+    else if(touche == "+" || touche =="-" || touche == "*" || touche == "/" ){
+        if(screen.textContent.trim().length != 0){
+            nombre = addOperator(tCalcul, nombre, touche);
+            screen.innerHTML = nombre;
         }
-        //Si l'opérateur est "="
-    else if (touche == "=" || touche =='Enter') {
+    }
+    //Si l'opérateur est "="
+    else if (touche == "=" || touche == 'Enter') {
+        console.log(tCalcul);
         let resulatoperator = "=";
         if(!bResultat && nombre && tCalcul.length>=2){
+            console.log("enter");
             nombre = addOperator(tCalcul, nombre, resulatoperator);
             nombre = calculer(tCalcul);
             screen.innerHTML = nombre;      
         }
     }
-         
-}, false);
-
+});
+    
+    
+    
     //Sous Firefox désactivation du raccourcis clavier sur la touche "/"
 document.addEventListener('keydown', (event) => {
     const touche = event.key;
@@ -129,6 +138,9 @@ document.addEventListener('keydown', (event) => {
         event.preventDefault();
     }
 }, false);
+    
+
+
 
 //Fonctions
 
@@ -200,6 +212,11 @@ function calculer(tabInit){
         bResultat = true;
         //Activation du bouton enregistrer
         input.disabled = false;
+        
+        //Arrondir à 2 décimales
+        if (resultat.toString().indexOf(".") != -1) {
+            resultat = resultat.toFixed(2);
+        }
         //retourne le dernier résultat
         return  resultat;
     }         
