@@ -1,37 +1,24 @@
 //Pointer les éléments du DOM
     //Boutons de la calculatrice
-var calc1 = document.getElementById("1");
-var calc2 = document.getElementById("2");
-var calc3 = document.getElementById("3");
-var calc4 = document.getElementById("4");
-var calc5 = document.getElementById("5");
-var calc6 = document.getElementById("6");
-var calc7 = document.getElementById("7");
-var calc8 = document.getElementById("8");
-var calc9 = document.getElementById("9");
-var calc0 = document.getElementById("0");
-var calcAdd = document.getElementById("+");
-var calcSous = document.getElementById("-");
-var calcDiv = document.getElementById("/");
-var calcMulti = document.getElementById("*");
-var calcResultat = document.getElementById("=");
-var calcDec = document.getElementById("virgule");
+
+var numeric = document.getElementsByClassName("numeric");
+var operator = document.getElementsByClassName("operator");
+
 var btnSuppr = document.getElementById("delete");
 
-    //Zone d'affichage
+//Zone d'affichage
 var screen = document.getElementById("calcul");
 var small_calc =  document.getElementById("en_cours");
 var tCalcul = [];
 var nombre = "";
-
-    //booléen
+//booléen
 var bResultat =false;
 
-    //Historique
+//Historique
 var save = document.getElementById("save");
 var inputResultat = document.getElementById("resultat");
 var tabCalcul = document.getElementById("tabCalcul");
-        //Si l'écran n'est pas vide après un enregistrement
+//Si l'écran n'est pas vide après un enregistrement
 if(rechargement.value == "true"){
     bResultat =true;
     //Initilialiser la variable avec le contenu de l'écran
@@ -40,108 +27,48 @@ if(rechargement.value == "true"){
 
 //Bouton enregistrement
 var input = document.getElementById("inputSave");
-    //Désactivé par défaut
+//Désactivé par défaut
 input.disabled = true;
 
 //Abonnement des boutons
     //Chiffres
         //Ajout d'un chiffre que si ce n'est pas un résultat dans la zone d'affichage 
-calc1.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc1.value) ;
-    }   
-});
-calc2.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc2.value) ;
-    }
-});
-calc3.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc3.value) ;
-    }
-});
-calc4.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc4.value) ;
-    }
-});
-calc5.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc5.value) ;
-    }
-});
-calc6.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc6.value) ;
-    }
-});
-calc7.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc7.value) ;
-    }
-});
-calc8.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc8.value) ;
-    }
-});
-calc9.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc9.value) ;
-    }
-});
-calc0.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc0.value) ;
-    }
-});
+    for (const item of numeric) {
+        item.addEventListener("click", function(){
+            if(!bResultat){
+                if(item.value != "."){
+                    nombre = addNumber(nombre, item.value) ;
+                } 
+                //Décimale
+                    //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
+            else if(nombre){
+                nombre = addNumber(nombre, item.value);
+                screen.innerHTML = nombre;
+            }  
+        }
+    });
+}
 
     //Opérateurs
-        //ajout de l'opérateur si l'écran n'est pas vide
-calcAdd.addEventListener("click", function(){
-    if(screen.textContent.trim().length != 0){
-        nombre = addOperator(tCalcul, nombre, calcAdd.value);
-        screen.innerHTML = nombre;
+    for (const item of operator) {
+        item.addEventListener("click", function(){
+            //ajout de l'opérateur si l'écran n'est pas vide
+            if(item.value != "="){
+                if(screen.textContent.trim().length != 0){
+                    nombre = addOperator(tCalcul, nombre, item.value);
+                    screen.innerHTML = nombre;
+                }
+            }
+        //Si l'opérateur est "="
+            else{
+                if(!bResultat && nombre && tCalcul.length>=2){
+                    nombre = addOperator(tCalcul, nombre, item.value);
+                    nombre = calculer(tCalcul);
+                    screen.innerHTML = nombre;      
+                }
+            } 
+        })
     }
-});
-calcSous.addEventListener("click", function(){
-    if(screen.textContent.trim().length != 0){
-        nombre = addOperator(tCalcul, nombre, calcSous.value);
-        screen.innerHTML = nombre;
-    }
-});
-calcDiv.addEventListener("click", function(){
-    if(screen.textContent.trim().length != 0){
-        nombre = addOperator(tCalcul, nombre, calcDiv.value);
-        screen.innerHTML = nombre;
-    }
-});
-calcMulti.addEventListener("click", function(){
-    if(screen.textContent.trim().length != 0){
-        nombre = addOperator(tCalcul, nombre, calcMulti.value);
-        screen.innerHTML = nombre;
-    }
-});
-
-    //Décimale
-        //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
-calcDec.addEventListener("click", function(){
-    if(nombre && !bResultat){
-        nombre = addNumber(nombre, calcDec.value);
-        screen.innerHTML = nombre;
-    } 
-});
-
-    //Bouton égale "="
-        //Les fonctions sont lancées si ce n'est pas un résultat qui est affiché et si il y a au moin 2 éléments dans le tableau de calcul
-calcResultat.addEventListener("click", function(){
-    if(!bResultat && nombre && tCalcul.length>=2){
-        nombre = addOperator(tCalcul, nombre, calcResultat.value);
-        nombre = calculer(tCalcul);
-        screen.innerHTML = nombre;      
-    }
-});
 
     //Bouton supprimer
         //vide les zones de texte et réinitialise les variables
@@ -156,18 +83,18 @@ btnSuppr.addEventListener("click",function(){
 
 //Fonctions
 
-    //Effectue un calcul sur les 3 premiers élements du tableau
-    //IN : un tableau (tab)
-    //OUT : un nombre (tab[0])
-function calculer(tab){  
+    //Effectue un calcul avec 3 éléments du tableau
+    //IN : un tableau (tabInit)
+    //OUT : une chaine de caractère
+function calculer(tabInit){  
     let tComplet = [];
     //Sauvegarde du tableau complet
-    for (let index = 0; index < tab.length; index++) {
-        tComplet[index] = tab[index];  
+    for (let index = 0; index < tabInit.length; index++) {
+        tComplet[index] = tabInit[index];  
     }
 
     // Vérification que le tableau contient au moin 3 éléments
-    if(tab.length >= 3) {
+    if(tabInit.length >= 3) {
         let nbr1 = "";
         let nbr2 = "";
         let operator = "";
@@ -175,70 +102,49 @@ function calculer(tab){
         let index = ""
         //Tant que la taille du tableau est supérieure à 1, on effectue un calcul avec les  3 élements
         //on les supprime et les remplace par le réultat du calcul
-        while (tab.length > 1) {
+        while (tabInit.length > 1) {
             //Si il y a une multiplication dans le calcul
-            if(tab.indexOf("*")!= -1){
-                index = tab.indexOf("*");
-                nbr1 = parseFloat(tab[index-1]);
-                nbr2 = parseFloat(tab[index+1]);
+            if(tabInit.indexOf("*")!= -1){
+                index = tabInit.indexOf("*");
+                nbr1 = parseFloat(tabInit[index-1]);
+                nbr2 = parseFloat(tabInit[index+1]);
                 //Si il n'y a pas de divion ou qu'elle est après la multiplication on effectue la multiplication
-                if( tab.indexOf("/") == -1 || tab.indexOf("*") < tab.indexOf("/")){
+                if( tabInit.indexOf("/") == -1 || tabInit.indexOf("*") < tabInit.indexOf("/")){
                     resultat = nbr1 * nbr2;
-                    tab.splice(index-1,3,resultat);
                 } 
                 //Sinon on fais la division
                 else{
-                    index = tab.indexOf("/");
-                    nbr1 = parseFloat(tab[index-1]);
-                    nbr2 = parseFloat(tab[index+1]);
-                    if (nbr2 == 0) {
-                        resultat = 0;
-                        tab.splice(index-1,3,resultat);
-
-                    } else {
-                        resultat = nbr1 / nbr2;
-                        tab.splice(index-1,3,resultat);
-                    }
+                    index = tabInit.indexOf("/");
+                    resultat = diviser(tabInit, index);
                 }              
-                
+                tabInit.splice(index-1,3,resultat);   
             }
             //Si il ny une division (et pas de miltiplication) on fait la division
-            else if(tab.indexOf("/")!= -1){
-                index = tab.indexOf("/");
-                nbr1 = parseFloat(tab[index-1]);
-                nbr2 = parseFloat(tab[index+1]);
-                if (nbr2 == 0) {
-                    resultat = 0;
-                    tab.splice(index-1,3,resultat);
-                } else {
-                    resultat = nbr1 / nbr2;
-                    tab.splice(index-1,3,resultat);
-                }
-               
+            else if(tabInit.indexOf("/")!= -1){
+                index = tabInit.indexOf("/");
+                resultat = diviser(tabInit, index);
+                tabInit.splice(index-1,3,resultat);
             }
             //On fait une addition ou une soustraction
             else{
-                nbr1 = parseFloat(tab[0]);
-                nbr2 = parseFloat(tab[2]);
-                operator = tab[1].trim();
+                nbr1 = parseFloat(tabInit[0]);
+                nbr2 = parseFloat(tabInit[2]);
+                operator = tabInit[1].trim();
                 resultat = "";
-                switch (operator) {
-                    case "+":
-                        resultat = nbr1 + nbr2;
-                        tab.splice(0,3,resultat);
-                    break;
-                    case "-":
-                        resultat = nbr1 - nbr2;
-                        tab.splice(0,3,resultat);
-                    break;
+                if( operator == "+"){
+                    resultat = nbr1 + nbr2;
                 }
+                else{
+                    resultat = nbr1 - nbr2;
+                }
+                tabInit.splice(0,3,resultat);
             }      
         }
  
         //Affichage du bouton de sauvegarde du calcule 
         tComplet.push(' = ');
         tabCalcul.value = tComplet;
-        inputResultat.value = tab[0];
+        inputResultat.value = resultat;
         //Ajout signe égal
         small_calc.innerHTML = tComplet.join('');
         //On indique que ce quie st écrit est un résultat
@@ -246,18 +152,34 @@ function calculer(tab){
         //Activation du bouton enregistrer
         input.disabled = false;
         //retourne le dernier résultat
-        return  tab[0];
+        return  resultat;
     }         
+}
+
+    //Diviser
+    //IN : Tableau, entien
+    //OUT: un nombre
+function diviser(tab, index){
+   
+    let number1 = parseFloat(tab[index-1]);
+    let number2 = parseFloat(tab[index+1]);
+    let result ="";
+    if (number2 == 0) {
+        result = 0;
+    } else {
+        result = number1 / number2;
+    }
+    return result;
 }
 
     //Ajouter un opérateur
     //IN: tableau (tab),  2 chaines de caracteres (nb et operator)
     //OUT : string (nb)
-function addOperator(tab, nb, operateur){
+function addOperator(tabOperator, nb, operateur){
     //désactive le bouton enregistrer
     input.disabled = true;
 
-    let length = tab.length;
+    let length = tabOperator.length;
     //Si la chaine n'est pas vide
     if(nb.length != 0 ){
         
@@ -266,39 +188,39 @@ function addOperator(tab, nb, operateur){
             //Dans le cas d'un rechergement après un enregistrement,on passe le booléen à false
             bResultat=false;
             //Ajouter au tableau le nombre et l'operateur
-            tab.push(nb);
-            tab.push(operateur);
+            tabOperator.push(nb);
+            tabOperator.push(operateur);
             //Afficher le contenu du tableau au dessus
-            small_calc.innerHTML = tab.join('');
+            small_calc.innerHTML = tabOperator.join('');
             //Vider le contenu de l'ecran et le retourner
             nb="";
             
             return nb;
         }
         //Si le tableau contient des éléments dont le dernier n'est pas un opérateur(+ - * /)
-        else if(tab[length - 1] != "+" || tab[length - 1]!= "-" || tab[length - 1]!= "*"  || tab[length - 1]!= "/" ){
+        else if(tabOperator[length - 1] != "+" || tabOperator[length - 1]!= "-" || tabOperator[length - 1]!= "*"  || tabOperator[length - 1]!= "/" ){
             //Si ce n'est pas un résultat affiché
             if(!bResultat){ 
                 //et si l'opérateur n'est pas "="
                 if(operateur != "="){
                     //On ajoute le nombre entré et l'opérateur
-                    tab.push(nb);
-                    tab.push(operateur);
+                    tabOperator.push(nb);
+                    tabOperator.push(operateur);
                 } 
                 //Sinon,  on ajoute que le nombre
                 else{
-                    tab.push(nb);
+                    tabOperator.push(nb);
                 }
             }
             //Si c'est un résultat qui est affiché
             else{
                 //On ajoute l'opérateur
-                tab.push(operateur);
+                tabOperator.push(operateur);
                 //on passe le booléen à false (ce n'est plus un résultat affiché)
                 bResultat=false;
             }
             //Afficher le contenu du tableau au dessus
-            small_calc.innerHTML = tab.join('');
+            small_calc.innerHTML = tabOperator.join('');
             //Vider le contenu de l'ecran et le retourner
             nb="";
             return nb;
