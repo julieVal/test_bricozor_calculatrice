@@ -32,28 +32,28 @@ if(isset($rechargement)){
                 </div>
             </div>
             <div class="pave row mt-1">
-                <input type="button" class="btn btn-light col-3" id="7" value="7">
-                <input type="button" class="btn btn-light col-3" id="8" value="8">
-                <input type="button" class="btn btn-light col-3" id="9" value="9">
-                <input type="button" class="btn btn-dark col-3" id="/" value="/">
+                <input type="button" class="numeric btn btn-light col-3" id="7" value="7">
+                <input type="button" class="numeric btn btn-light col-3" id="8" value="8">
+                <input type="button" class="numeric btn btn-light col-3" id="9" value="9">
+                <input type="button" class="operator btn btn-dark col-3" id="/" value="/">
             </div>
             <div class="pave row">
-                <input type="button" class="btn btn-light col-3" id="4" value="4">
-                <input type="button" class="btn btn-light col-3" id="5" value="5">
-                <input type="button" class="btn btn-light col-3" id="6" value="6">
-                <input type="button" class="btn btn-dark col-3" id="*" value="*">
+                <input type="button" class="numeric btn btn-light col-3" id="4" value="4">
+                <input type="button" class="numeric btn btn-light col-3" id="5" value="5">
+                <input type="button" class="numeric btn btn-light col-3" id="6" value="6">
+                <input type="button" class="operator btn btn-dark col-3" id="*" value="*">
             </div>
             <div class=" pave row">
-                <input type="button" class="btn btn-light col-3" id="1" value="1">
-                <input type="button" class="btn btn-light col-3" id="2" value="2">
-                <input type="button" class="btn btn-light col-3" id="3" value="3">
-                <input type="button" class="btn btn-dark col-3" id="-" value="-">
+                <input type="button" class="numeric btn btn-light col-3" id="1" value="1">
+                <input type="button" class="numeric btn btn-light col-3" id="2" value="2">
+                <input type="button" class="numeric btn btn-light col-3" id="3" value="3">
+                <input type="button" class="operator btn btn-dark col-3" id="-" value="-">
             </div>
             <div class="pave row">
-                <input type="button" class="btn btn-light col-3" id="virgule" value=".">
-                <input type="button" class="btn btn-light col-3 border-light" id="0" value="0">
-                <input type="button" class="btn btn-success col-3" id="=" value="=">
-                <input type="button" class="btn btn-dark col-3" id="+" value="+">
+                <input type="button" class="numeric btn btn-light col-3" id="virgule" value=".">
+                <input type="button" class="numeric btn btn-light col-3 border-light" id="0" value="0">
+                <input type="button" class="operator btn btn-success col-3" id="=" value="=">
+                <input type="button" class="operator btn btn-dark col-3" id="+" value="+">
             </div>
         </div>
 

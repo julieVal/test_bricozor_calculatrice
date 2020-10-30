@@ -1,37 +1,27 @@
+
+
+
 //Pointer les éléments du DOM
     //Boutons de la calculatrice
-var calc1 = document.getElementById("1");
-var calc2 = document.getElementById("2");
-var calc3 = document.getElementById("3");
-var calc4 = document.getElementById("4");
-var calc5 = document.getElementById("5");
-var calc6 = document.getElementById("6");
-var calc7 = document.getElementById("7");
-var calc8 = document.getElementById("8");
-var calc9 = document.getElementById("9");
-var calc0 = document.getElementById("0");
-var calcAdd = document.getElementById("+");
-var calcSous = document.getElementById("-");
-var calcDiv = document.getElementById("/");
-var calcMulti = document.getElementById("*");
-var calcResultat = document.getElementById("=");
-var calcDec = document.getElementById("virgule");
+
+var numeric = document.getElementsByClassName("numeric");
+var operator = document.getElementsByClassName("operator");
+
 var btnSuppr = document.getElementById("delete");
 
-    //Zone d'affichage
+//Zone d'affichage
 var screen = document.getElementById("calcul");
 var small_calc =  document.getElementById("en_cours");
 var tCalcul = [];
 var nombre = "";
-
-    //booléen
+//booléen
 var bResultat =false;
 
-    //Historique
+//Historique
 var save = document.getElementById("save");
 var inputResultat = document.getElementById("resultat");
 var tabCalcul = document.getElementById("tabCalcul");
-        //Si l'écran n'est pas vide après un enregistrement
+//Si l'écran n'est pas vide après un enregistrement
 if(rechargement.value == "true"){
     bResultat =true;
     //Initilialiser la variable avec le contenu de l'écran
@@ -40,108 +30,48 @@ if(rechargement.value == "true"){
 
 //Bouton enregistrement
 var input = document.getElementById("inputSave");
-    //Désactivé par défaut
+//Désactivé par défaut
 input.disabled = true;
 
 //Abonnement des boutons
     //Chiffres
-        //Ajout d'un chiffre que si ce n'est pas un résultat dans la zone d'affichage 
-calc1.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc1.value) ;
-    }   
-});
-calc2.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc2.value) ;
-    }
-});
-calc3.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc3.value) ;
-    }
-});
-calc4.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc4.value) ;
-    }
-});
-calc5.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc5.value) ;
-    }
-});
-calc6.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc6.value) ;
-    }
-});
-calc7.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc7.value) ;
-    }
-});
-calc8.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc8.value) ;
-    }
-});
-calc9.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc9.value) ;
-    }
-});
-calc0.addEventListener("click", function(){
-    if(!bResultat){
-        nombre = addNumber(nombre, calc0.value) ;
-    }
-});
+    //Ajout d'un chiffre que si ce n'est pas un résultat dans la zone d'affichage 
+    for (const item of numeric) {
+        item.addEventListener("click", function(){
+            if(!bResultat){
+                if(item.value != "."){
+                    nombre = addNumber(nombre, item.value) ;
+                } 
+                //Décimale
+                    //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
+            else if(nombre){
+                nombre = addNumber(nombre, item.value);
+                screen.innerHTML = nombre;
+            }  
+        }
+    });
+}
 
-    //Opérateurs
-        //ajout de l'opérateur si l'écran n'est pas vide
-calcAdd.addEventListener("click", function(){
-    if(screen.textContent.trim().length != 0){
-        nombre = addOperator(tCalcul, nombre, calcAdd.value);
-        screen.innerHTML = nombre;
-    }
-});
-calcSous.addEventListener("click", function(){
-    if(screen.textContent.trim().length != 0){
-        nombre = addOperator(tCalcul, nombre, calcSous.value);
-        screen.innerHTML = nombre;
-    }
-});
-calcDiv.addEventListener("click", function(){
-    if(screen.textContent.trim().length != 0){
-        nombre = addOperator(tCalcul, nombre, calcDiv.value);
-        screen.innerHTML = nombre;
-    }
-});
-calcMulti.addEventListener("click", function(){
-    if(screen.textContent.trim().length != 0){
-        nombre = addOperator(tCalcul, nombre, calcMulti.value);
-        screen.innerHTML = nombre;
-    }
-});
-
-    //Décimale
-        //Ajout si un chiffre est déjà entré et que ce n'est pas un résultat
-calcDec.addEventListener("click", function(){
-    if(nombre && !bResultat){
-        nombre = addNumber(nombre, calcDec.value);
-        screen.innerHTML = nombre;
-    } 
-});
-
-    //Bouton égale "="
-        //Les fonctions sont lancées si ce n'est pas un résultat qui est affiché et si il y a au moin 2 éléments dans le tableau de calcul
-calcResultat.addEventListener("click", function(){
-    if(!bResultat && nombre && tCalcul.length>=2){
-        nombre = addOperator(tCalcul, nombre, calcResultat.value);
-        nombre = calculer(tCalcul);
-        screen.innerHTML = nombre;      
-    }
-});
+//Opérateurs
+    //ajout de l'opérateur si l'écran n'est pas vide
+        for (const item of operator) {
+            item.addEventListener("click", function(){
+                console.log(item.value) ;
+                if(item.value != "="){
+                    if(screen.textContent.trim().length != 0){
+                        nombre = addOperator(tCalcul, nombre, item.value);
+                        screen.innerHTML = nombre;
+                    }
+                }
+                else{
+                    if(!bResultat && nombre && tCalcul.length>=2){
+                        nombre = addOperator(tCalcul, nombre, item.value);
+                        nombre = calculer(tCalcul);
+                        screen.innerHTML = nombre;      
+                    }
+                } 
+            })
+        }
 
     //Bouton supprimer
         //vide les zones de texte et réinitialise les variables
