@@ -21,12 +21,12 @@ if(isset($rechargement)){
             </div>
             <!-- Pavé numérique-->
             <div class="action row mt-2 mb-1">
-                <button class="btn btn-warning col-3" id="cancel"><i class="far fa-trash-alt fa-2x"></i></button>
-                <button class="btn btn-warning col-3" id="delete"><i class="fas fa-backspace fa-2x"></i></button>
+                <button class="btn btn-warning col-3" id="cancel" title="Annuler"><i class="far fa-trash-alt fa-2x"></i></button>
+                <button class="btn btn-warning col-3" id="delete" title="Supprimer"><i class="fas fa-backspace fa-2x"></i></button>
                 <!-- enregistrement du résultat -->
                 <div id="save" class="col-3">
                     <form action="<?php echo $_SERVER['PHP_SELF'].'?action=saveHistory'?>" method="post">
-                        <button class="btn btn-info btn-block" id="inputSave" type="submit" value="Enregistrer"><i class="far fa-save fa-2x"></i></button>
+                        <button class="btn btn-info btn-block" id="inputSave" type="submit" title="Enregistrer le calul"><i class="far fa-save fa-2x"></i></button>
                         <input type="hidden" name="resultat" id="resultat" value="">
                         <input type="hidden" name="tabCalcul" id="tabCalcul" value="">
                     </form>
