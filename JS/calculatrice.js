@@ -259,8 +259,6 @@ function diviser(tab, index){
 function addOperator(tabOperator, nb, operateur){
     //désactive le bouton enregistrer
     input.disabled = true;
-console.log(nb);
-console.log(tabOperator);
     let length = tabOperator.length;
     //Si la chaine n'est pas vide
     if(nb.length != 0 ){
