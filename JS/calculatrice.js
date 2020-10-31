@@ -229,10 +229,11 @@ function calculer(tabInit){
   
         //Arrondir à 2 décimales
         if (resultat.toString().indexOf(".") != -1) {
-            resultat = resultat.toFixed(2);
+            tabInit[0] = resultat.toFixed(2);
+            return  tabInit[0];
         }
         //retourne le dernier résultat
-        return  resultat;
+        return  tabInit[0];
     }         
 }
 
@@ -258,7 +259,8 @@ function diviser(tab, index){
 function addOperator(tabOperator, nb, operateur){
     //désactive le bouton enregistrer
     input.disabled = true;
-
+console.log(nb);
+console.log(tabOperator);
     let length = tabOperator.length;
     //Si la chaine n'est pas vide
     if(nb.length != 0 ){

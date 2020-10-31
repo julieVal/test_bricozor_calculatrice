@@ -48,12 +48,17 @@ Les multiplications et divisions sont faites en priorités sur les additions et 
 
 Les multiplications et divisions sont exécutées sont l'ordre de lecture, de gauche à droite.
 
-## Amélirations visées
-Possibilité d'écrire directement dans la zone de calcul,
+
+### V4
+Possibilité d'écrire dans la zone de calcul via le clavier,
 Possibilité d'entrer des valeurs négatives,
+
+Possibilité de corriger la saisie du chiffre en cours,
+
+Les résultats sont arrondis à deux chiffres après la virgule.
+
+## Amélirations visées
 Améliorer la zone d'écriture du calcul (gérer les débordements),
 Afficher un message de confirmation lors de l'enregistrement d'un résultat,
 Enregistrer un résultat sans rechargement de page (AJAX ou JS),
-Possibilité de vider l'historique,
-Possibilité de corriger la saisie du chiffre en cours,
-Enlever les zéros en fin de nombre (ex : 3.000 => 3)
+Possibilité de vider l'historique.
