@@ -2,7 +2,7 @@
     //Boutons de la calculatrice
 var numeric = document.getElementsByClassName("numeric");
 var operator = document.getElementsByClassName("operator");
-var btnSuppr = document.getElementById("delete");
+var btnSuppr = document.getElementById("cancel");
 
     //Zone d'affichage
 var screen = document.getElementById("calcul");
