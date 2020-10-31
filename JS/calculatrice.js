@@ -51,6 +51,7 @@ for (const item of numeric) {
                 nombre = addNumber(nombre, item.value);
             }  
         }
+        item.blur();
     });
 }
 
@@ -59,7 +60,11 @@ for (const item of operator) {
     item.addEventListener("click", function(){
         //ajout de l'opérateur si l'écran n'est pas vide
         if(item.value != "="){
-            if(screen.textContent.trim().length != 0){
+            if( item.value == '-' && !nombre ){
+                nombre = "-";
+                screen.innerHTML = nombre;
+            }
+            else if(screen.textContent.length != 0 && nombre != "-"){
                 nombre = addOperator(tCalcul, nombre, item.value);
                 screen.innerHTML = nombre;
             }
@@ -72,6 +77,7 @@ for (const item of operator) {
                 screen.innerHTML = nombre;      
             }
         } 
+        item.blur();
     });
 }
 
@@ -94,17 +100,19 @@ document.addEventListener('keyup', (event) => {
     }
     //opérateurs
     else if(touche == "+" || touche =="-" || touche == "*" || touche == "/" ){
-        if(screen.textContent.trim().length != 0){
+        if( touche == '-' && !nombre){
+            nombre = "-";
+            screen.innerHTML = nombre;
+        }
+        else if(screen.textContent.length != 0 && nombre != "-"){
             nombre = addOperator(tCalcul, nombre, touche);
             screen.innerHTML = nombre;
         }
     }
         //Si l'opérateur est "="
     else if (touche == "=" || touche == 'Enter') {
-        console.log(tCalcul);
         let resulatoperator = "=";
         if(!bResultat && nombre && tCalcul.length>=2){
-            console.log("enter");
             nombre = addOperator(tCalcul, nombre, resulatoperator);
             nombre = calculer(tCalcul);
             screen.innerHTML = nombre;      
