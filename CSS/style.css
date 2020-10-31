@@ -1,34 +1,39 @@
+/* Touches du pavé numérique */
 .pave{
-   min-height: 70px;
+    min-height: 70px;
 }
-
+/* Lss boutons*/
 .btn-light, .btn-dark, .btn-success, .btn-warning, .btn-info{
     border-radius: 0%;
 }
+/* Bouton décimale*/
+#virgule{
+    border-right: 1px solid#28a745;
+    border-top: 1px solid #28a745;
+}
+/* font pour les boutons du pavé numérique*/
+.numeric, .operator{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+/* Ligne de boutons d'action */
+.action, #en_cours, #inputSave{
+    height: 60px;
+}
+/* formulaire du sauvegarde*/ 
+#save{
+    padding: 0;
+}
+/* Zone d'affichage*/
 .calcul{
     font-size: 2rem;
 }
-
+/* Page historique */
 .history{
     height: 100vh;
 }
-
+/* Liste des enregistrements */
 .historyList{
     max-height: 30em;
     overflow-y:scroll;
 }
-
-.action, #en_cours, #inputSave{
-    height: 60px;
-}
-   
-#save{
-    padding: 0;
-}
-
-#virgule{
-    border-right: 1px solid#28a745;
-    border-top: 1px solid #28a745;
-    font-weight: bolder;
-}
-
