@@ -22,6 +22,7 @@ if(rechargement.value == "true"){
     bResultat =true;
     //Initilialiser la variable avec le contenu de l'écran
     nombre = screen.innerHTML;
+    
 }
 else{
     initialise();
@@ -40,9 +41,10 @@ btnCancel.addEventListener("click",function(){
     //Bouton Delete
 btnDelete.addEventListener("click", function(){
     if(nombre){
-       nombre = nombre.substring(0, nombre.length - 1);
-       screen.innerHTML = nombre;
+        delOneCarac()
     }
+    //On enlève le focus pour pouvoir utiliser la touche entrée du clavier
+    btnDelete.blur();
 })
 
     //Chiffres à l'écran
@@ -130,8 +132,7 @@ document.addEventListener('keyup', (event) => {
     if( touche == 'Backspace'){
         //Si nombre n'est pas vide et que ce n'est pas un résultat
         if(nombre && !bResultat){
-            nombre = nombre.substring(0, nombre.length - 1);
-            screen.innerHTML = nombre;
+            delOneCarac()
         }
         //Si un résultat est afficher on supprime tout (Cancel)
         else if (bResultat){
@@ -147,10 +148,7 @@ document.addEventListener('keydown', (event) => {
         event.preventDefault();
     }
 });
-    
-
-
-
+ 
 //Fonctions
 
     //Effectue un calcul avec 3 éléments du tableau
@@ -334,7 +332,7 @@ function addNumber(nb, value){
     }
 }
 
-//Initialiser les variables
+    //Initialiser les variables
 function initialise(){
     bResultat = false;
     screen.innerHTML = "";
@@ -342,4 +340,10 @@ function initialise(){
     small_calc.innerHTML="";
     tCalcul = [];
     input.disabled = true;
+}
+
+    //Supprimer le dernier caractère de l'écran et afficher la chaine
+function delOneCarac(){
+    nombre = nombre.substring(0, nombre.length - 1);
+    screen.innerHTML = nombre;
 }
