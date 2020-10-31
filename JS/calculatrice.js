@@ -30,14 +30,14 @@ else{
 
 //Abonnement des boutons
 
-    //Bouton supprimer
+    //Bouton Cancel
     //vide les zones de texte et réinitialise les variables
 btnCancel.addEventListener("click",function(){
     initialise();
     //On enlève le focus pour pouvoir utiliser la touche entrée du clavier
     btnCancel.blur();
 });
-
+    //Bouton Delete
 btnDelete.addEventListener("click", function(){
     if(nombre){
        nombre = nombre.substring(0, nombre.length - 1);
@@ -107,7 +107,7 @@ document.addEventListener('keyup', (event) => {
         }
     }
     //opérateurs
-    else if(touche == "+" || touche =="-" || touche == "*" || touche == "/" ){
+    if(touche == "+" || touche =="-" || touche == "*" || touche == "/" ){
         if( touche == '-' && !nombre){
             nombre = "-";
             screen.innerHTML = nombre;
@@ -118,7 +118,7 @@ document.addEventListener('keyup', (event) => {
         }
     }
         //Si l'opérateur est "="
-    else if (touche == "=" || touche == 'Enter') {
+    if (touche == "=" || touche == 'Enter') {
         let resulatoperator = "=";
         if(!bResultat && nombre && tCalcul.length>=2){
             nombre = addOperator(tCalcul, nombre, resulatoperator);
@@ -126,12 +126,24 @@ document.addEventListener('keyup', (event) => {
             screen.innerHTML = nombre;      
         }
     }
+    //Suppression au clavier
+    if( touche == 'Backspace'){
+        //Si nombre n'est pas vide et que ce n'est pas un résultat
+        if(nombre && !bResultat){
+            nombre = nombre.substring(0, nombre.length - 1);
+            screen.innerHTML = nombre;
+        }
+        //Si un résultat est afficher on supprime tout (Cancel)
+        else if (bResultat){
+            initialise();
+        }
+    }
 }, false);
     
-    //Sous Firefox désactivation du raccourcis clavier sur la touche "/" (recherche rapide)
+    //Sous Firefox désactivation du raccourcis clavier sur la touche "/" (recherche rapide) et 'backspace'
 document.addEventListener('keydown', (event) => {
     const touche = event.key;
-    if(touche == "/"){
+    if(touche == "/" || touche == "Backspace"){
         event.preventDefault();
     }
 });
