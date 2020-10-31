@@ -7,7 +7,7 @@ if(isset($rechargement)){
     <div class="container-fluid col-md-6 mx-auto pt-5">
         <div class="text-center">
          <h1>Calculatrice</h1>
-         <p>Utilisez le pavé numérique de la page pour commencer à utiliser cette calculatrice.</p>
+         <p>Utilisez le pavé numérique de la page ou celui de votre clavier pour commencer à utiliser cette calculatrice.</p>
         </div>
         
 
