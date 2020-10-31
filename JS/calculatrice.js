@@ -2,7 +2,8 @@
     //Boutons de la calculatrice
 var numeric = document.getElementsByClassName("numeric");
 var operator = document.getElementsByClassName("operator");
-var btnSuppr = document.getElementById("delete");
+var btnCancel = document.getElementById("cancel");
+var btnDelete = document.getElementById("delete");
 
     //Zone d'affichage
 var screen = document.getElementById("calcul");
@@ -21,6 +22,9 @@ if(rechargement.value == "true"){
     bResultat =true;
     //Initilialiser la variable avec le contenu de l'écran
     nombre = screen.innerHTML;
+    tCalcul =[];
+    input.disabled = true;
+    btnDelete.disabled = true;
 }
 else{
     initialise();
@@ -29,13 +33,22 @@ else{
 
 //Abonnement des boutons
 
-    //Bouton supprimer
+    //Bouton Cancel
     //vide les zones de texte et réinitialise les variables
-btnSuppr.addEventListener("click",function(){
+btnCancel.addEventListener("click",function(){
+    btnDelete.disabled = false;
     initialise();
     //On enlève le focus pour pouvoir utiliser la touche entrée du clavier
-    btnSuppr.blur();
+    btnCancel.blur();
 });
+    //Bouton Delete
+btnDelete.addEventListener("click", function(){
+    if(nombre && (!bResultat || rechargement == 'false')){
+        delOneCarac()
+    }
+    //On enlève le focus pour pouvoir utiliser la touche entrée du clavier
+    btnDelete.blur();
+})
 
     //Chiffres à l'écran
         //Ajout d'un chiffre que si ce n'est pas un résultat dans la zone d'affichage 
@@ -68,6 +81,7 @@ for (const item of operator) {
                 nombre = addOperator(tCalcul, nombre, item.value);
                 screen.innerHTML = nombre;
             }
+            btnDelete.disabled = false;
         }
         //Si l'opérateur est "="
         else{
@@ -99,7 +113,7 @@ document.addEventListener('keyup', (event) => {
         }
     }
     //opérateurs
-    else if(touche == "+" || touche =="-" || touche == "*" || touche == "/" ){
+    if(touche == "+" || touche =="-" || touche == "*" || touche == "/" ){
         if( touche == '-' && !nombre){
             nombre = "-";
             screen.innerHTML = nombre;
@@ -108,9 +122,10 @@ document.addEventListener('keyup', (event) => {
             nombre = addOperator(tCalcul, nombre, touche);
             screen.innerHTML = nombre;
         }
+        btnDelete.disabled = false;
     }
         //Si l'opérateur est "="
-    else if (touche == "=" || touche == 'Enter') {
+    if (touche == "=" || touche == 'Enter') {
         let resulatoperator = "=";
         if(!bResultat && nombre && tCalcul.length>=2){
             nombre = addOperator(tCalcul, nombre, resulatoperator);
@@ -118,19 +133,27 @@ document.addEventListener('keyup', (event) => {
             screen.innerHTML = nombre;      
         }
     }
+    //Suppression au clavier
+    if( touche == 'Backspace'){
+        //Si nombre n'est pas vide et que ce n'est pas un résultat
+        if(nombre && !bResultat){
+            delOneCarac()
+        }
+        //Si un résultat est afficher on supprime tout (Cancel)
+        else if (bResultat){
+            initialise();
+        }
+    }
 }, false);
     
-    //Sous Firefox désactivation du raccourcis clavier sur la touche "/" (recherche rapide)
+    //Sous Firefox désactivation du raccourcis clavier sur la touche "/" (recherche rapide) et 'backspace'
 document.addEventListener('keydown', (event) => {
     const touche = event.key;
-    if(touche == "/"){
+    if(touche == "/" || touche == "Backspace"){
         event.preventDefault();
     }
 });
-    
-
-
-
+ 
 //Fonctions
 
     //Effectue un calcul avec 3 éléments du tableau
@@ -201,7 +224,9 @@ function calculer(tabInit){
         bResultat = true;
         //Activation du bouton enregistrer
         input.disabled = false;
-        
+        //Désactivation du bouton de suppression
+        btnDelete.disabled = true;
+  
         //Arrondir à 2 décimales
         if (resultat.toString().indexOf(".") != -1) {
             resultat = resultat.toFixed(2);
@@ -314,7 +339,7 @@ function addNumber(nb, value){
     }
 }
 
-//Initialiser les variables
+    //Initialiser les variables
 function initialise(){
     bResultat = false;
     screen.innerHTML = "";
@@ -322,4 +347,11 @@ function initialise(){
     small_calc.innerHTML="";
     tCalcul = [];
     input.disabled = true;
+    btnDelete.disabled = false;
+}
+
+    //Supprimer le dernier caractère de l'écran et afficher la chaine
+function delOneCarac(){
+    nombre = nombre.substring(0, nombre.length - 1);
+    screen.innerHTML = nombre;
 }

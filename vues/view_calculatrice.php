@@ -7,7 +7,7 @@ if(isset($rechargement)){
     <div class="container-fluid col-md-6 mx-auto pt-5">
         <div class="text-center">
          <h1>Calculatrice</h1>
-         <p>Utilisez le pavé numérique de la page pour commencer à utiliser cette calculatrice.</p>
+         <p>Utilisez le pavé numérique de la page ou celui de votre clavier pour commencer à utiliser cette calculatrice.</p>
         </div>
         
 
@@ -21,7 +21,8 @@ if(isset($rechargement)){
             </div>
             <!-- Pavé numérique-->
             <div class="action row mt-2 mb-1">
-                <input type="button" class="btn btn-warning col-6" id="delete" value="Annuler">
+                <button class="btn btn-warning col-3" id="cancel"><i class="fas fa-trash-alt"></i></button>
+                <button class="btn btn-warning col-3" id="delete"><i class="fas fa-backspace"></i></button>
                 <!-- enregistrement du résultat -->
                 <div id="save" class="col-6">
                     <form action="<?php echo $_SERVER['PHP_SELF'].'?action=saveHistory'?>" method="post">
