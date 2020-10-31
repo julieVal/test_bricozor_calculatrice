@@ -2,7 +2,8 @@
     //Boutons de la calculatrice
 var numeric = document.getElementsByClassName("numeric");
 var operator = document.getElementsByClassName("operator");
-var btnSuppr = document.getElementById("cancel");
+var btnCancel = document.getElementById("cancel");
+var btnDelete = document.getElementById("delete");
 
     //Zone d'affichage
 var screen = document.getElementById("calcul");
@@ -31,11 +32,18 @@ else{
 
     //Bouton supprimer
     //vide les zones de texte et réinitialise les variables
-btnSuppr.addEventListener("click",function(){
+btnCancel.addEventListener("click",function(){
     initialise();
     //On enlève le focus pour pouvoir utiliser la touche entrée du clavier
-    btnSuppr.blur();
+    btnCancel.blur();
 });
+
+btnDelete.addEventListener("click", function(){
+    if(nombre){
+       nombre = nombre.substring(0, nombre.length - 1);
+       screen.innerHTML = nombre;
+    }
+})
 
     //Chiffres à l'écran
         //Ajout d'un chiffre que si ce n'est pas un résultat dans la zone d'affichage 
