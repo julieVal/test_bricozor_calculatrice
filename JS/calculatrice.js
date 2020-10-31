@@ -22,7 +22,9 @@ if(rechargement.value == "true"){
     bResultat =true;
     //Initilialiser la variable avec le contenu de l'écran
     nombre = screen.innerHTML;
-    
+    tCalcul =[];
+    input.disabled = true;
+    btnDelete.disabled = true;
 }
 else{
     initialise();
@@ -34,13 +36,14 @@ else{
     //Bouton Cancel
     //vide les zones de texte et réinitialise les variables
 btnCancel.addEventListener("click",function(){
+    btnDelete.disabled = false;
     initialise();
     //On enlève le focus pour pouvoir utiliser la touche entrée du clavier
     btnCancel.blur();
 });
     //Bouton Delete
 btnDelete.addEventListener("click", function(){
-    if(nombre){
+    if(nombre && (!bResultat || rechargement == 'false')){
         delOneCarac()
     }
     //On enlève le focus pour pouvoir utiliser la touche entrée du clavier
@@ -78,6 +81,7 @@ for (const item of operator) {
                 nombre = addOperator(tCalcul, nombre, item.value);
                 screen.innerHTML = nombre;
             }
+            btnDelete.disabled = false;
         }
         //Si l'opérateur est "="
         else{
@@ -118,6 +122,7 @@ document.addEventListener('keyup', (event) => {
             nombre = addOperator(tCalcul, nombre, touche);
             screen.innerHTML = nombre;
         }
+        btnDelete.disabled = false;
     }
         //Si l'opérateur est "="
     if (touche == "=" || touche == 'Enter') {
@@ -219,7 +224,9 @@ function calculer(tabInit){
         bResultat = true;
         //Activation du bouton enregistrer
         input.disabled = false;
-        
+        //Désactivation du bouton de suppression
+        btnDelete.disabled = true;
+  
         //Arrondir à 2 décimales
         if (resultat.toString().indexOf(".") != -1) {
             resultat = resultat.toFixed(2);
@@ -340,6 +347,7 @@ function initialise(){
     small_calc.innerHTML="";
     tCalcul = [];
     input.disabled = true;
+    btnDelete.disabled = false;
 }
 
     //Supprimer le dernier caractère de l'écran et afficher la chaine
